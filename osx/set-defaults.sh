@@ -395,6 +395,9 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4e
 
+# ZSH as the Default Shell in Terminal.app
+sudo chsh -s /bin/zsh
+
 # Enable the WebKit Developer Tools in the Mac App Store
 defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 
@@ -485,4 +488,3 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "Safari" "SystemUIServer" ; do killall "${app}" > /dev/null 2>&1
 done
 echo "Note that some of these changes require a logout/restart to take effect."
-# exit 0

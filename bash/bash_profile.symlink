@@ -1,4 +1,1 @@
 export PATH="$PATH":~/bin
-
-# Default Homebrew Cask Options
-export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=~/Applications"

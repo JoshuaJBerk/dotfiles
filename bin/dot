@@ -12,9 +12,6 @@ export ZSH=$HOME/.dotfiles
 # Set OS X defaults
 $ZSH/osx/set-defaults.sh
 
-# Install OS X Applications
-# $ZSH/osx/apps-install.sh
-
 # Upgrade homebrew
 brew update
 
