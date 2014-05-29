@@ -1,6 +1,4 @@
-autoload colors && colors
-# cheers, @ehrenmurdick
-# http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
+autoload colors && colors # Enable colors in prompt
 
 if (( $+commands[git] ))
 then
@@ -9,11 +7,11 @@ else
   git="/usr/bin/git"
 fi
 
-git_branch() {
+function git_branch() {
   echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
-git_dirty() {
+function git_dirty() {
   if $(! $git status -s &> /dev/null)
   then
     echo ""
@@ -27,17 +25,17 @@ git_dirty() {
   fi
 }
 
-git_prompt_info () {
+function git_prompt_info () {
  ref=$($git symbolic-ref HEAD 2>/dev/null) || return
 # echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
  echo "${ref#refs/heads/}"
 }
 
-unpushed () {
+function unpushed () {
   $git cherry -v @{upstream} 2>/dev/null
 }
 
-need_push () {
+function need_push () {
   if [[ $(unpushed) == "" ]]
   then
     echo " "
@@ -46,37 +44,16 @@ need_push () {
   fi
 }
 
-ruby_version() {
-  if (( $+commands[rbenv] ))
-  then
-    echo "$(rbenv version | awk '{print $1}')"
-  fi
-
-  if (( $+commands[rvm-prompt] ))
-  then
-    echo "$(rvm-prompt | awk '{print $1}')"
-  fi
+function username(){
+  echo "%{$fg_bold[yellow]%}`whoami`%{$reset_color%}"
 }
 
-rb_prompt() {
-  if ! [[ -z "$(ruby_version)" ]]
-  then
-    echo "%{$fg_bold[yellow]%}$(ruby_version)%{$reset_color%} "
-  else
-    echo ""
-  fi
-}
-
-directory_name() {
+function directory_name() {
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n› '
-set_prompt () {
-  export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
+function box_name {
+    hostname -s
 }
 
-precmd() {
-  title "zsh" "%m" "%55<...<%~"
-  set_prompt
-}
+export PROMPT=$'\n$(username) at $(box_name) in $(directory_name) $(git_dirty)$(need_push)\n› '

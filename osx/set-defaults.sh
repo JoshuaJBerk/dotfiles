@@ -380,8 +380,11 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Miscellanea                                                                 #
 ###############################################################################
 
-# Disable Time Machine
-sudo tmutil disable
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Disable local Time Machine backups
+hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 # Don't play feedback when volume is changed
 # defaults write -g 'com.apple.sound.beep.feedback' -bool false
@@ -395,7 +398,10 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4e
 
-# ZSH as the Default Shell in Terminal.app
+# Don’t display the annoying prompt when quitting iTerm
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+# ZSH as the Default Shell
 sudo chsh -s /bin/zsh
 
 # Enable the WebKit Developer Tools in the Mac App Store
