@@ -2,13 +2,13 @@
 # Installs Applications for OSX
 
 # Ask for the administrator password upfront
-sudo -v
+# sudo -v
 
 ###############################################################################
 # ZSH                                                                         #
 ###############################################################################
 
-brew install zsh > /dev/null 2>&1
+# brew install zsh > /dev/null 2>&1
 
 ###############################################################################
 # Apple App Store - Do This Manually                                          #
@@ -70,10 +70,7 @@ brew install zsh > /dev/null 2>&1
 # Sublime Text 3
 
 # Xcode Command Line Tools
-xcode-select --install
-
-# OSX Software Update
-softwareupdate --install --all
+# xcode-select --install
 
 ###############################################################################
 # All Done! :-D                                                               #

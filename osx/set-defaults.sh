@@ -485,3 +485,4 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "Safari" "SystemUIServer" ; do killall "${app}" > /dev/null 2>&1
 done
 echo "Note that some of these changes require a logout/restart to take effect."
+# exit 0
