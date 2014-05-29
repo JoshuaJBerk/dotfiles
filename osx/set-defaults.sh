@@ -34,6 +34,12 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
+# Enable Resume system-wide
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
+
+# Disable the crash reporter
+# defaults write com.apple.CrashReporter DialogType -string "none"
+
 # Enable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool false
 
@@ -50,6 +56,9 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Set Help Viewer windows to non-floating mode
+defaults write com.apple.helpviewer DevMode -bool true
 
 # Set the window resize speed for Cocoa applications
 # defaults write NSGlobalDomain NSWindowResizeTime -float 2.0
@@ -221,6 +230,16 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
+# Alter What Shows in the Sidebar
+/usr/libexec/PlistBuddy -c "Delete :favorites:ShowRemovable" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Add :favorites:ShowRemovable bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Delete :favorites:ShowHardDisks" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Add :favorites:ShowHardDisks bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Delete :favorites:ShowEjectables" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Add :favorites:ShowEjectables bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Delete :favorites:ShowServers" ~/Library/Preferences/com.apple.sidebarlists.plist
+/usr/libexec/PlistBuddy -c "Add :favorites:ShowServers bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
+
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
@@ -293,8 +312,17 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 # Don’t show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
+# Remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-delay -float 0
+
+# Remove the animation when hiding/showing the Dock
+# defaults write com.apple.dock autohide-time-modifier -float 0
+
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
+
+# Add iOS Simulator to Launchpad
+# sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone Simulator.app" "/Applications/iOS Simulator.app"
 
 # Hot corners
 # Possible values:
@@ -388,27 +416,63 @@ defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-# sudo scutil --set ComputerName "JJB-AIR"
-# sudo scutil --set HostName "JJB-AIR"
-# sudo scutil --set LocalHostName "JJB-AIR"
-# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "JJB-AIR"
+sudo scutil --set ComputerName "JJB-AIR"
+sudo scutil --set HostName "JJB-AIR"
+sudo scutil --set LocalHostName "JJB-AIR"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "JJB-AIR"
 
 # Menu bar: hide Default System Icons
-# for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-# 	defaults write "${domain}" dontAutoLoad -array \
-# 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-# 		"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-# 		"/System/Library/CoreServices/Menu Extras/User.menu" \
-# 		"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-# 		"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-# 		"/System/Library/CoreServices/Menu Extras/Clock.menu"
-# done
+for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+	defaults write "${domain}" dontAutoLoad -array \
+		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+		"/System/Library/CoreServices/Menu Extras/Volume.menu" \
+		"/System/Library/CoreServices/Menu Extras/User.menu" \
+		"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+		"/System/Library/CoreServices/Menu Extras/Battery.menu" \
+		"/System/Library/CoreServices/Menu Extras/Clock.menu"
+done
+
+# Menu bar: Insert iStat Menu Modules
+defaults write com.apple.systemuiserver menuExtras -array "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusCPU.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusMemory.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusDrives.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusNetwork.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusTemps.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusBattery.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusDateAndTimes.menu"
+
+# Wipe all (default) app icons from the Dock
+defaults write com.apple.dock persistent-apps -array ""
+
+# Add custom icons into the Dock
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Safari.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome Canary.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/FirefoxNightly.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/VLC.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/App Store.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/LimeChat.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Dash.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/GitHub.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Sublime Text.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Utilities/Terminal.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+
+# Remove iTunesHelper from login
+osascript -e 'tell application "System Events" to delete login item "iTunesHelper"' > /dev/null 2>&1
+
+# Start Applications at login
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Alfred 2.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Caffeine.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/CheatSheet.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Divvy.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Drive.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Flux.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Fantastical.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome Canary.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/LiveReload.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Codepoints.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Transmit.app/Contents/MacOS/TransmitMenu.app", hidden:true }' > /dev/null 2>&1
+
+# Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
+ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 # Reset Launchpad
 # find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
-
-# Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
-# ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 # # Restore Wallpaper Settings DB
 # # Change picture every day, random order
