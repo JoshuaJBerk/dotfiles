@@ -57,3 +57,7 @@ function box_name {
 }
 
 export PROMPT=$'\n$(username) at $(box_name) in $(directory_name) $(git_dirty)$(need_push)\n› '
+
+precmd() {
+  title "zsh" "%m" "%55<...<%~"
+}
