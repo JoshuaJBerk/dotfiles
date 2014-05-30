@@ -386,6 +386,9 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable local Time Machine backups
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
+# Disable Spotlight
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+
 # Don't play feedback when volume is changed
 # defaults write -g 'com.apple.sound.beep.feedback' -bool false
 
@@ -461,7 +464,7 @@ defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Utilities/Terminal.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
-# Remove iTunesHelper from login
+# Remove Applications from login
 osascript -e 'tell application "System Events" to delete login item "iTunesHelper"' > /dev/null 2>&1
 
 # Start Applications at login
