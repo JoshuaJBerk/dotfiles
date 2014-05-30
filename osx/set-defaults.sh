@@ -473,7 +473,6 @@ osascript -e 'tell application "System Events" to make new login item at end of 
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Fantastical.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome Canary.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/LiveReload.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Codepoints.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Transmit.app/Contents/MacOS/TransmitMenu.app", hidden:true }' > /dev/null 2>&1
 
 # Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
