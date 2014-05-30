@@ -176,9 +176,6 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 # Finder                                                                      #
 ###############################################################################
 
-# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-defaults write com.apple.finder QuitMenuItem -bool true
-
 # Finder: hide hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool false
 
@@ -387,10 +384,10 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 # Don't play feedback when volume is changed
-# defaults write -g 'com.apple.sound.beep.feedback' -bool false
+defaults write -g 'com.apple.sound.beep.feedback' -bool false
 
 # Disable the sound effects on boot
-# sudo nvram SystemAudioVolume=" "
+sudo nvram SystemAudioVolume=" "
 
 # Use AirDrop over every interface (Wi-Fi/PAN + Ethernet, etc.)
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
@@ -410,9 +407,6 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
-
-# Disable Spotlight
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
 
 # Hide Spotlight tray-icon (and subsequent helper)
 sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
@@ -468,6 +462,7 @@ osascript -e 'tell application "System Events" to delete login item "iTunesHelpe
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Alfred 2.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/CheatSheet.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Drive.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/iTerm.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Flux.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Fantastical.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome Canary.app", hidden:true }' > /dev/null 2>&1
