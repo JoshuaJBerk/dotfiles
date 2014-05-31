@@ -122,7 +122,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 0
 
 # Eliminate Keyboard Delay Until Repeat
-defaults write NSGlobalDomain InitialKeyRepeat -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Increase sound quality for Bluetooth headphones/headsets
 #defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
