@@ -395,6 +395,11 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4e
 
+# Enable “focus follows mouse” for Terminal.app and all X11 apps
+# i.e. hover over a window and start typing in it without clicking first
+#defaults write com.apple.terminal FocusFollowsMouse -bool true
+#defaults write org.x.X11 wm_ffm -bool true
+
 # ZSH as the Default Shell
 sudo chsh -s /bin/zsh
 
