@@ -1,4 +1,6 @@
 syntax on
+set number 
+set ruler
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
