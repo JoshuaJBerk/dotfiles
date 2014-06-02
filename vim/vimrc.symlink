@@ -10,40 +10,53 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set history=50      " keep 50 lines of command line history
-set ruler           " show the cursor position all the time
-set showmode        " display Insert/Visual/etc.
-set showcmd         " display incomplete commands
-set showmatch       " quickly jump to matching bracket
-set hidden          " hide buffers instead of closing them
-set number          " add numbered lines (option: relativenumber)
-set ignorecase      " search: removes case sensitivity by default
-set smartcase       " search: adding ≥1 uppercase turns on case sensitivity
-set incsearch       " do incremental searching
-set gdefault        " substitute all matches in line (not first)
-set encoding=utf-8  " UTF-8 encoding
-set nowrap          " don't wrap lines
-set autoindent      " copy the indentation from the previous line
-set tabstop=4       " display tabs as X spaces
-set softtabstop=4   " insert mode creates X spaces
-set shiftwidth=4    " reindent operations (<< && >>)
-set expandtab       " use spaces, not tabs
-set mouse=a         " enable full mouse support in the console
-set ttyfast         " improves redrawing
-set nolist          " display whitespace normally (toggle on/off in UI)
+set history=50           " keep 50 lines of command line history
+set ruler                " show the cursor position all the time
+set showmode             " display Insert/Visual/etc.
+set showcmd              " display incomplete commands
+set showmatch            " quickly jump to matching bracket
+set hidden               " hide buffers instead of closing them
+set relativenumber       " add numbered lines (option: relativenumber)
+set ignorecase           " search: removes case sensitivity by default
+set smartcase            " search: adding ≥1 uppercase = case sensitivity
+set incsearch            " do incremental searching
+set gdefault             " substitute all matches in line (not first)
+set encoding=utf-8       " UTF-8 encoding
+set nowrap               " don't wrap lines
+set autoindent           " copy the indentation from the previous line
+set expandtab            " use spaces, not tabs
+set smarttab             " insert tabs on the start of a line re: shiftwidth
+set tabstop=4            " display tabs as X spaces
+set softtabstop=4        " insert mode creates X spaces
+set shiftwidth=4         " reindent operations (<< && >>)
+set shiftround           " use multiple of shiftwidth with '<' and '>'
+set mouse=a              " enable full mouse support in the console
+set ttyfast              " improves redrawing
+set scrolloff=4          " keep 4 lines off the edges during scroll
+set nolist               " display whitespace normally (toggle on/off in UI)
+set backupdir=~/.vim     " backup directory in dotfiles
 
 " Enable the full autocomplete menu (using TAB)
 set wildmenu
 set wildmode=list:longest,full
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" To use, or not to use.
+" virtualedit=all " Allows the cursor in illegal areas
 
-"Unsets the 'last search pattern' register by hitting return
-nnoremap <CR> :noh<CR><CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Don't use Ex mode, use Q to quit w/o save instead. 
-map Q :q!<Enter>
+map Q :q!<Enter> 
+
+" Easy Normal Mode from Insert :)
+inoremap ;; <esc>
+
+" set MapLeader from \ to ,
+let mapleader=","
+
+" Leader Key Maps
+nnoremap <silent><leader><space> :noh<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -57,8 +70,7 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-
-  " Enable file type detection.
+" Enable file type detection.
   " Use the default filetype settings,
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
@@ -79,15 +91,13 @@ if has("autocmd")
   augroup END
 
 else
-
   set autoindent    " always set autoindenting on
-
 endif " has("autocmd")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Establish a connection w/Pathogen Package Manager
+" Initiate w/Pathogen Package Manager
 call pathogen#infect()
 call pathogen#helptags()
 
