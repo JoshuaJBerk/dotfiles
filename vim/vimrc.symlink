@@ -10,37 +10,40 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set history=50           " keep 50 lines of command line history
-set ruler                " show the cursor position all the time
-set showmode             " display Insert/Visual/etc.
-set showcmd              " display incomplete commands
-set showmatch            " quickly jump to matching bracket
-set hidden               " hide buffers instead of closing them
-set relativenumber       " add numbered lines (option: relativenumber)
-set ignorecase           " search: removes case sensitivity by default
-set smartcase            " search: adding ≥1 uppercase = case sensitivity
-set incsearch            " do incremental searching
-set gdefault             " substitute all matches in line (not first)
-set encoding=utf-8       " UTF-8 encoding
-set nowrap               " don't wrap lines
-set autoindent           " copy the indentation from the previous line
-set expandtab            " use spaces, not tabs
-set smarttab             " insert tabs on the start of a line re: shiftwidth
-set tabstop=4            " display tabs as X spaces
-set softtabstop=4        " insert mode creates X spaces
-set shiftwidth=4         " reindent operations (<< && >>)
-set shiftround           " use multiple of shiftwidth with '<' and '>'
-set mouse=a              " enable full mouse support in the console
-set ttyfast              " improves redrawing
-set scrolloff=4          " keep 4 lines off the edges during scroll
-set list                 " display format characters (toggle on/off in UI)
-set laststatus=2         " always display status bar
-set foldmethod=syntax    " collapsible code segments
-set autoread             " updates VIM file if changed elsewhere
+set history=50               " keep 50 lines of command line history
+set ruler                    " show the cursor position all the time
+set showmode                 " display Insert/Visual/etc.
+set showcmd                  " display incomplete commands
+set showmatch                " quickly jump to matching bracket
+set hidden                   " hide buffers instead of closing them
+set relativenumber           " add numbered lines (option: relativenumber)
+set ignorecase               " search: removes case sensitivity by default
+set smartcase                " search: adding ≥1 uppercase = case sensitivity
+set incsearch                " do incremental searching
+set gdefault                 " substitute all matches in line (not first)
+set encoding=utf-8           " UTF-8 encoding
+set nowrap                   " don't wrap lines
+set autoindent               " copy the indentation from the previous line
+set expandtab                " use spaces, not tabs
+set smarttab                 " insert tabs @ line start re: shiftwidth
+set tabstop=4                " display tabs as X spaces
+set softtabstop=4            " insert mode creates X spaces
+set shiftwidth=4             " reindent operations (<< && >>)
+set shiftround               " use multiple of shiftwidth with '<' and '>'
+set mouse=a                  " enable full mouse support in the console
+set ttyfast                  " improves redrawing
+set scrolloff=4              " keep 4 lines off the edges during scroll
+set laststatus=2             " always display status bar
+set foldmethod=syntax        " collapsible code segments
+set autoread                 " updates VIM file if changed elsewhere
+
+" View Settings
+set list
+set listchars=tab:▸\ ,trail:·,extends:#,precedes:#,nbsp:·
 
 " Backup Settings
-set undodir=~/.vim/undo
 set undofile
+set undodir=~/.vim/undo
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 
@@ -55,12 +58,24 @@ set wildmode=list:longest,full
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Don't use Ex mode, use Q to quit w/o save instead.
+" Initiate w/Pathogen Package Manager
+call pathogen#infect()
+call pathogen#helptags()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Q to quit w/o save instead.
 map Q :q!<Enter>
 
 " Arrow Keys
 noremap <DOWN> gj
 noremap <UP> gk
+noremap <LEFT> <nop>
+noremap <RIGHT> <nop>
+inoremap <DOWN> <nop>
+inoremap <UP> <nop>
+inoremap <LEFT> <nop>
+inoremap <RIGHT> <nop>
 
 " Set MapLeaders
 let mapleader=","
@@ -68,6 +83,9 @@ let maplocalleader = "\\"
 
 " Leader Key Maps
 nnoremap <silent><leader><space> :noh<CR>
+
+" Strip all trailing whitespace from a file, using ,W
+nnoremap <silent><leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,13 +122,6 @@ if has("autocmd")
 else
   set autoindent    " always set autoindenting on
 endif " has("autocmd")
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Initiate w/Pathogen Package Manager
-call pathogen#infect()
-call pathogen#helptags()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
