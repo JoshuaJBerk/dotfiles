@@ -52,8 +52,9 @@ map Q :q!<Enter>
 " Easy Normal Mode from Insert :)
 inoremap ;; <esc>
 
-" set MapLeader from \ to ,
+" Set MapLeaders
 let mapleader=","
+let maplocalleader = "\\"
 
 " Leader Key Maps
 nnoremap <silent><leader><space> :noh<CR>
