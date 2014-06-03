@@ -34,10 +34,15 @@ set mouse=a              " enable full mouse support in the console
 set ttyfast              " improves redrawing
 set scrolloff=4          " keep 4 lines off the edges during scroll
 set list                 " display format characters (toggle on/off in UI)
-set backupdir=~/.vim     " backup directory in dotfiles
 set laststatus=2         " always display status bar
 set foldmethod=syntax    " collapsible code segments
 set autoread             " updates VIM file if changed elsewhere
+
+" Backup Settings
+set undodir=~/.vim/undo
+set undofile
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
 
 " Enable the full autocomplete menu (using TAB)
 set wildmenu
@@ -45,12 +50,17 @@ set wildmode=list:longest,full
 
 " To use, or not to use.
 " set virtualedit=all " Allows the cursor in illegal areas
+" set spell " spelling correction mode
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Don't use Ex mode, use Q to quit w/o save instead.
 map Q :q!<Enter>
+
+" Arrow Keys
+noremap <DOWN> gj
+noremap <UP> gk
 
 " Set MapLeaders
 let mapleader=","

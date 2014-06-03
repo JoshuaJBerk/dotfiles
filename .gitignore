@@ -1,3 +1,12 @@
 sublime/User/Package\ Control.sublime-settings
 sublime/User/Package Control.last-run
 git/gitconfig.symlink
+
+### VIM ###
+[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+%*
+*~
