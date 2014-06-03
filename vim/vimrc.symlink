@@ -33,24 +33,24 @@ set shiftround           " use multiple of shiftwidth with '<' and '>'
 set mouse=a              " enable full mouse support in the console
 set ttyfast              " improves redrawing
 set scrolloff=4          " keep 4 lines off the edges during scroll
-set nolist               " display whitespace normally (toggle on/off in UI)
+set list                 " display format characters (toggle on/off in UI)
 set backupdir=~/.vim     " backup directory in dotfiles
+set laststatus=2         " always display status bar
+set foldmethod=syntax    " collapsible code segments
+set autoread             " updates VIM file if changed elsewhere
 
 " Enable the full autocomplete menu (using TAB)
 set wildmenu
 set wildmode=list:longest,full
 
 " To use, or not to use.
-" virtualedit=all " Allows the cursor in illegal areas
+" set virtualedit=all " Allows the cursor in illegal areas
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Don't use Ex mode, use Q to quit w/o save instead. 
-map Q :q!<Enter> 
-
-" Easy Normal Mode from Insert :)
-inoremap ;; <esc>
+" Don't use Ex mode, use Q to quit w/o save instead.
+map Q :q!<Enter>
 
 " Set MapLeaders
 let mapleader=","
@@ -65,14 +65,14 @@ nnoremap <silent><leader><space> :noh<CR>
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
+syntax on
+set hlsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 " Enable file type detection.
-  " Use the default filetype settings,
+" Use the default filetype settings,
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
 
