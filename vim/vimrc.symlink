@@ -23,7 +23,6 @@ set incsearch                " do incremental searching
 set gdefault                 " substitute all matches in line (not first)
 set encoding=utf-8           " UTF-8 encoding
 set nowrap                   " don't wrap lines
-" set colorcolumn=+1           " make text beyond textwidth *super* obvious
 set autoindent               " copy the indentation from the previous line
 set expandtab                " use spaces, not tabs
 set smarttab                 " insert tabs @ line start re: shiftwidth
