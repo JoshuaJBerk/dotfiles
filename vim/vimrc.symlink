@@ -7,54 +7,50 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-set history=50               " keep 50 lines of command line history
-set ruler                    " show the cursor position all the time
-set showmode                 " display Insert/Visual/etc.
-set showcmd                  " display incomplete commands
-set showmatch                " quickly jump to matching bracket
-set hidden                   " hide buffers instead of closing them
-set relativenumber           " add numbered lines (option: relativenumber)
-set ignorecase               " search: removes case sensitivity by default
-set smartcase                " search: adding ≥1 uppercase = case sensitivity
-set incsearch                " do incremental searching
-set gdefault                 " substitute all matches in line (not first)
-set encoding=utf-8           " UTF-8 encoding
-set nowrap                   " don't wrap lines
-set autoindent               " copy the indentation from the previous line
+" Indentation
 set expandtab                " use spaces, not tabs
 set smarttab                 " insert tabs @ line start re: shiftwidth
 set tabstop=4                " display tabs as X spaces
 set softtabstop=4            " insert mode creates X spaces
 set shiftwidth=4             " reindent operations (<< && >>)
 set shiftround               " use multiple of shiftwidth with '<' and '>'
-set mouse=a                  " enable full mouse support in the console
+
+" Search/Substitution/Completion
+set ignorecase               " removes case sensitivity by default
+set smartcase                " adding ≥1 uppercase = case sensitivity
+set incsearch                " do incremental searching
+set gdefault                 " substitute all matches in line (not first)
+set showmatch                " quickly jump to matching bracket
+set completeopt=menu,longest " disable preview window on completion
+set wildmenu
+set wildmode=list:longest,full
+
+" View
+set listchars=tab:▸\ ,trail:·,extends:#,precedes:#,nbsp:¤,eol:¬
+set list                     " display formatting characters
+set relativenumber           " add numbered lines (option: relativenumber)
+set nowrap                   " don't wrap lines
 set ttyfast                  " improves redrawing
 set scrolloff=4              " keep 4 lines off the edges during scroll
 set laststatus=2             " always display status bar
-set foldmethod=syntax        " collapsible code segments
-set autoread                 " updates VIM file if changed elsewhere
-set completeopt=menu,longest " disable preview window on completion
+set ruler                    " show the cursor position all the time
+set showmode                 " display Insert/Visual/etc.
+set showcmd                  " display incomplete commands
 set virtualedit=block        " allow cursor everywhere in V-Block mode
+set mouse=a                  " enable full mouse support in the console
+set encoding=utf-8           " UTF-8 encoding
+set foldmethod=syntax        " collapsible code segments
+set bs=indent,eol,start      " allow backspacing in insert mode
+set nospell                  " spelling correction mode
 
-" View Settings
-set list
-set listchars=tab:▸\ ,trail:·,extends:#,precedes:#,nbsp:¤,eol:¬
-
-" Backup Settings
+" Backup
 set undofile
 set undodir=~/.vim/undo
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
-
-" Enable the full autocomplete menu (using TAB)
-set wildmenu
-set wildmode=list:longest,full
-
-" To use, or not to use.
-" set spell " spelling correction mode
+set history=50
+set autoread                 " updates VIM file if changed elsewhere
+set hidden                   " hide buffers instead of closing them
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,12 +59,14 @@ set wildmode=list:longest,full
 call pathogen#infect()
 call pathogen#helptags()
 
+" Plugins
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Q to quit w/o save instead.
 map Q :q!<Enter>
 
-" Indending Behavior
+" Indenting Behavior
 vmap > >gv
 vmap < <gv
 
@@ -89,7 +87,7 @@ let maplocalleader = "\\"
 " Leader Key Maps
 nnoremap <silent><leader><space> :noh<CR>
 nnoremap <silent><leader>pp :setlocal paste!<cr>
-nnoremap <silent><leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+nnoremap <silent><leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,6 +124,12 @@ if has("autocmd")
 else
   set autoindent    " always set autoindenting on
 endif " has("autocmd")
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Color Scheme Modifications
+highlight LineNr ctermfg=grey
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
