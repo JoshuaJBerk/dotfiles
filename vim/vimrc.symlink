@@ -37,7 +37,7 @@ set ruler                    " show the cursor position all the time
 set showmode                 " display Insert/Visual/etc.
 set showcmd                  " display incomplete commands
 set virtualedit=block        " allow cursor everywhere in V-Block mode
-set mouse=a                  " enable full mouse support in the console
+set mouse=a                  " enable mouse support in the console
 set encoding=utf-8           " UTF-8 encoding
 set foldmethod=syntax        " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
@@ -63,8 +63,8 @@ call pathogen#helptags()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use Q to quit w/o save instead.
-map Q :q!<Enter>
+" Use Q for VIM CLI History
+map Q q:
 
 " Indenting Behavior
 vmap > >gv
