@@ -404,7 +404,14 @@ defaults write com.apple.terminal StringEncodings -array 4e
 #defaults write org.x.X11 wm_ffm -bool true
 
 # ZSH as the Default Shell
-sudo chsh -s /bin/zsh
+if [ -f /usr/local/bin/zsh ]
+then # Check Standard Shell File
+    if grep "/usr/local/bin/zsh" /etc/shells
+    then chsh -s /usr/local/bin/zsh
+    else echo /usr/local/bin/zsh >> /etc/shells
+    fi
+else chsh -s /bin/zsh # System Install (Instead)
+fi
 
 # Enable the WebKit Developer Tools in the Mac App Store
 defaults write com.apple.appstore WebKitDeveloperExtras -bool true
@@ -434,13 +441,13 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 
 # Menu bar: hide Default System Icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-	defaults write "${domain}" dontAutoLoad -array \
-		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-		"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-		"/System/Library/CoreServices/Menu Extras/User.menu" \
-		"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-		"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-		"/System/Library/CoreServices/Menu Extras/Clock.menu"
+    defaults write "${domain}" dontAutoLoad -array \
+        "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+        "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+        "/System/Library/CoreServices/Menu Extras/User.menu" \
+        "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+        "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+        "/System/Library/CoreServices/Menu Extras/Clock.menu"
 done
 
 # Menu bar: Insert iStat Menu Modules
