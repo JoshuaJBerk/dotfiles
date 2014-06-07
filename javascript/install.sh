@@ -1,5 +1,6 @@
 #!/bin/sh
-
+#
+# Checks/Installs NodeJS
 if test ! $(which node)
 then
     echo " Installing Node.JS for you."
@@ -18,3 +19,5 @@ fi
 if test ! $(which gulp)
 then npm install -g gulp
 fi
+
+exit 0
