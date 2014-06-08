@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+# Javascript
+
 # Checks/Installs NodeJS
 if test ! $(which node)
 then

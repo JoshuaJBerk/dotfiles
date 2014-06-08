@@ -2,9 +2,6 @@
 #
 # bootstrap installs things.
 
-# Ask for Administrator Password
-sudo -v
-
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd)
 
@@ -126,6 +123,14 @@ install_dotfiles () {
   done
 }
 
+administrate () {
+  printf "  [ \033[00;34m..\033[0m ] "
+  sudo -v
+  # Keep-alive: update existing `sudo` time stamp until script has finished
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+}
+
+administrate
 setup_gitconfig
 install_dotfiles
 
