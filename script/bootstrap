@@ -124,8 +124,7 @@ install_dotfiles () {
 }
 
 administrate () {
-  printf "  [ \033[00;34m..\033[0m ] "
-  sudo -v
+  info sudo -v
   # Keep-alive: update existing `sudo` time stamp until script has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 }
@@ -137,7 +136,7 @@ install_dotfiles
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
-  info "installing dependencies"
+  info "installing dependencies\n"
   info ''
   if source bin/dot > /tmp/dotfiles-dot 2>&1
   then

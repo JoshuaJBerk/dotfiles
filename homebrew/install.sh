@@ -13,22 +13,36 @@ fi
 brew update
 brew upgrade
 
+# Githup Repos as Formulae w/Taps
+brew tap homebrew/dupes
+brew tap caskroom/cask
+
 # Install Homebrew packages
-brew install coreutils
-brew install moreutils
-brew install findutils
-brew install gnu-sed --default-names
 brew install ack
 brew install spark
 brew install grc
 brew install git
-brew install tmux
+brew install hg
+brew install wget
+brew install tree
+brew install zsh
+
+# GNU Duplicates
+brew install coreutils --default-names
+brew install moreutils --default-names
+brew install findutils --default-names
+brew install gnu-sed --default-names
+brew install gawk --default-names
+brew install gnutls --default-names
+brew install gnu-indent --default-names
+brew install gnu-getopt --default-names
+brew install grep --default-names
 
 # Install more recent versions of some OS X tools
 brew install vim --override-system-vi
-brew install homebrew/dupes/grep
 
 # Remove temporary install files
 brew cleanup
+brew tap --repair 
 
 exit 0
