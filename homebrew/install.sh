@@ -26,6 +26,7 @@ brew install hg
 brew install wget
 brew install tree
 brew install zsh
+brew install libyaml
 
 # GNU Duplicates
 brew install coreutils --default-names
