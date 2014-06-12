@@ -27,6 +27,7 @@ brew install wget
 brew install tree
 brew install zsh
 brew install libyaml
+brew install heroku-toolbelt
 
 # GNU Duplicates
 brew install coreutils --default-names
