@@ -1,7 +1,3 @@
-sublime/User/Package\ Control.sublime-settings
-sublime/User/Package Control.last-run
-git/gitconfig.symlink
-
 ### VIM ###
 [a-w][a-z]
 [._]s[a-w][a-z]
@@ -10,3 +6,6 @@ Session.vim
 .netrwhist
 %*
 *~
+
+### GIT ###
+git/gitconfig.symlink

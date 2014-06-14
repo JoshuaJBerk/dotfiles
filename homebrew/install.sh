@@ -28,6 +28,7 @@ brew install tree
 brew install zsh
 brew install libyaml
 brew install heroku-toolbelt
+brew install postgresql
 
 # GNU Duplicates
 brew install coreutils --default-names

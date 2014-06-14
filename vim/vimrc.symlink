@@ -29,7 +29,7 @@ set wildmode=list:longest,full
 set listchars=tab:▸\ ,trail:·,extends:#,precedes:#,nbsp:¤,eol:¬
 set list                     " display formatting characters
 set relativenumber           " add numbered lines (option: relativenumber)
-set nowrap                   " don't wrap lines
+set wrap                     " wrap lines
 set ttyfast                  " improves redrawing
 set scrolloff=4              " keep 4 lines off the edges during scroll
 set laststatus=2             " always display status bar
@@ -51,6 +51,7 @@ set directory=~/.vim/swaps
 set history=50
 set autoread                 " updates VIM file if changed elsewhere
 set hidden                   " hide buffers instead of closing them
+set clipboard+=unnamed       " system clipboard by default
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,6 +70,9 @@ map Q q:
 " Indenting Behavior
 vmap > >gv
 vmap < <gv
+
+" ESC from Insert Mode w/"kj"
+inoremap kj <ESC>
 
 " Arrow Keys
 noremap <DOWN> gj

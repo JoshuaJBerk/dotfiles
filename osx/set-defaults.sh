@@ -465,7 +465,6 @@ defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/App Store.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/LimeChat.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Dash.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Sublime Text.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
@@ -483,8 +482,8 @@ osascript -e 'tell application "System Events" to make new login item at end of 
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/LiveReload.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Transmit.app/Contents/MacOS/TransmitMenu.app", hidden:true }' > /dev/null 2>&1
 
-# Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
-ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+# PostgreSQL via Launchctl at Startup
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 
 # Reset Launchpad
 # find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete

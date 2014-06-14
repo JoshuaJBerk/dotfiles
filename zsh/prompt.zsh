@@ -53,7 +53,7 @@ function directory_name() {
 }
 
 function box_name {
-    hostname -s
+  echo "%{$fg_bold[blue]%}`hostname -s`%{$reset_color%}"
 }
 
 export PROMPT=$'\n$(username) at $(box_name) in $(directory_name) $(git_dirty)$(need_push)\n› '
