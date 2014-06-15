@@ -3,9 +3,11 @@
 [._]s[a-w][a-z]
 *.un~
 Session.vim
-.netrwhist
 %*
 *~
 
 ### GIT ###
 git/gitconfig.symlink
+
+### MISC ###
+*hist

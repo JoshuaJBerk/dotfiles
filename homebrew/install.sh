@@ -29,6 +29,7 @@ brew install zsh
 brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql
+brew install hub
 
 # GNU Duplicates
 brew install coreutils --default-names

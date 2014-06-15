@@ -1,4 +1,3 @@
-export PS1='%3~$(git_info_for_prompt)%# '
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
