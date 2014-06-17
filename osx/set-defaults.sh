@@ -386,6 +386,9 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable local Time Machine backups
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
+# Disable Gatekeeper
+sudo spctl --master-disable
+
 # Don't play feedback when volume is changed
 defaults write -g 'com.apple.sound.beep.feedback' -bool false
 
