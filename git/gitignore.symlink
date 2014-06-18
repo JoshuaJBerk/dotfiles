@@ -8,6 +8,8 @@ syntax: glob
 .DS_Store
 .localized
 Desktop.ini
+.AppleDouble
+.LSOverride
 
 # Cache files
 ._*
@@ -18,3 +20,10 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
