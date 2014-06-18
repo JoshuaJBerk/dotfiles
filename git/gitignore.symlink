@@ -6,6 +6,7 @@ syntax: glob
 
 # Folder view configuration files
 .DS_Store
+.localized
 Desktop.ini
 
 # Cache files

@@ -31,7 +31,7 @@ set list                     " display formatting characters
 set relativenumber           " add numbered lines (option: relativenumber)
 set wrap                     " wrap lines
 set ttyfast                  " improves redrawing
-set scrolloff=4              " keep 4 lines off the edges during scroll
+set scrolloff=3              " keep 3 lines off the edges during scroll
 set laststatus=2             " always display status bar
 set ruler                    " show the cursor position all the time
 set showmode                 " display Insert/Visual/etc.
