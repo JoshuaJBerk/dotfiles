@@ -16,6 +16,7 @@ brew upgrade
 # Githup Repos as Formulae w/Taps
 brew tap homebrew/dupes
 brew tap caskroom/cask
+brew tap caskroom/homebrew-versions
 
 # Install Homebrew packages
 brew install ack
