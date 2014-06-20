@@ -31,6 +31,7 @@ brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql
 brew install hub
+brew install git-flow
 
 # GNU Duplicates
 brew install coreutils --default-names
