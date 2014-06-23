@@ -32,7 +32,7 @@ set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
 set list                     " display formatting characters
 set wrap                     " wrap lines
 set showbreak=↪\             " indicator for wrapped lines
-set relativenumber           " add numbered lines (option: relativenumber)
+set nu rnu                   " add numbered lines (option: relativenumber)
 set ttyfast                  " improves redrawing
 set lazyredraw               " don't redraw during macros/etc.
 set scrolloff=3              " keep 3 lines off the edges during scroll
@@ -52,8 +52,10 @@ set shm=a                    " avoid 'press Enter to continue'
 set undofile                 " persistent save of undo history
 set udir=~/.vim/undo         " store undo in dotfiles
 set bdir=~/.vim/backups      " store backup in dotfiles
+set vdir=~/.vim/views        " store views in dotfiles
 set dir=~/.vim/swaps         " store swap in dotfiles
 set history=50               " # of commands to keep
+set ut=2000                  " time to initiate swap/CursorHold AU
 set autoread                 " updates VIM file if changed elsewhere
 set hidden                   " hide buffers instead of closing them
 set clipboard+=unnamed       " system clipboard by default
@@ -65,32 +67,18 @@ set clipboard+=unnamed       " system clipboard by default
 call pathogen#infect()
 call pathogen#helptags()
 
-" Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Q for VIM CLI History
 map Q q:
 
-" Indenting Behavior
+" V-Mode Indenting Behavior
 vmap > >gv
 vmap < <gv
 
-" ESC from Insert Mode w/"kj"
-inoremap kj <ESC>
-
 " Redraw screen + remove search highlights
 nnoremap <C-L> :nohl<CR><C-L>
-
-" Arrow Keys
-noremap <DOWN> gj
-noremap <UP> gk
-noremap <LEFT> <nop>
-noremap <RIGHT> <nop>
-inoremap <DOWN> <nop>
-inoremap <UP> <nop>
-inoremap <LEFT> <nop>
-inoremap <RIGHT> <nop>
 
 " Set MapLeaders
 let mapleader=","
@@ -99,6 +87,7 @@ let maplocalleader = "\\"
 " Leader Key Maps
 nnoremap <silent><leader>pp :setlocal paste!<cr>
 nnoremap <silent><leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
+nnoremap <leader><leader> <c-^>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -118,6 +107,9 @@ if has("autocmd")
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
+
+  " Exit 'Insert Mode' after UpdateTime
+  au CursorHoldI * stopinsert
 
   " Filetype settings (tabs, spaces, etc.)
   au FileType python,css setl et sts=4 ts=4 shiftwidth=4 tw=79
