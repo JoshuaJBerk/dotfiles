@@ -1,6 +1,39 @@
+###########################
+#  Configuration
+###########################
+
 # enable UTF-8
 set -g status-utf8 on
 setw -g utf8 on
+
+# intuitive mouse usage (e.g. copy mode) 
+setw -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
+set -g mouse-select-window on
+
+# start window numbers at 1 to match keyboard order with tmux window order
+setw -g pane-base-index 1
+set -g base-index 1
+
+# automatic window numbering/naming
+set -g renumber-windows on
+set -g automatic-rename
+
+# highlight window when it has new activity
+setw -g monitor-activity on
+set -g visual-activity on
+
+# remove administrative debris (session name, hostname, time) in status bar
+set -g status-left ''
+set -g status-right ''
+
+# increase scrollback lines
+set -g history-limit 10000
+
+###########################
+#  Key Bindings
+###########################
 
 # prefix to Control-a (like GNU screen) 
 unbind C-b
@@ -25,28 +58,11 @@ bind -r C-l select-window -t :+
 bind -t vi-copy 'v' begin-selection
 bind -t vi-copy 'y' copy-selection
 
-# intuitive mouse usage (e.g. copy mode) 
-setw -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
-
-# start window numbers at 1 to match keyboard order with tmux window order
-set -g base-index 1
-setw -g pane-base-index 1
-
-# automatic window numbering/naming
-set -g renumber-windows on
-set -g automatic-rename
+##########################
+# Colors
+##########################
 
 # improve colors
 set -g default-terminal 'screen-256color'
 set -g status-bg '#666666'
 set -g status-fg '#aaaaaa'
-
-# remove administrative debris (session name, hostname, time) in status bar
-set -g status-left ''
-set -g status-right ''
-
-# increase scrollback lines
-set -g history-limit 10000

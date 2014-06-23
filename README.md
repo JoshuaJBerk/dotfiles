@@ -4,8 +4,6 @@
 
 Your dotfiles are how you personalize your system. These are mine, almost entirely influenced by those of Zach Holman (thanks, dude!) and all those that came before his setup. If you're interested in the philosophy behind why projects like these are awesome, you might want to [read Zach's post on the subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
 
-
-
 **Since these scripts have been customized for my system, I'd recommend that you refer to [Zach's repository](https://github.com/holman/dotfiles) directly. If you run into any snags, please [open an issue](https://github.com/holman/dotfiles/issues) on Zach's repository - he'd love to get it fixed for you!**
 
 ## install
