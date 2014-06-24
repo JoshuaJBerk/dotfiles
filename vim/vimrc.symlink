@@ -80,6 +80,16 @@ vmap < <gv
 " Redraw screen + remove search highlights
 nnoremap <C-L> :nohl<CR><C-L>
 
+" Arrow Keys
+noremap <DOWN> gj
+noremap <UP> gk
+noremap <LEFT> :bp<cr>
+noremap <RIGHT> :bn<cr>
+inoremap <DOWN> <nop>
+inoremap <UP> <nop>
+inoremap <LEFT> <nop>
+inoremap <RIGHT> <nop>
+
 " Set MapLeaders
 let mapleader=","
 let maplocalleader = "\\"
