@@ -20,7 +20,6 @@ brew tap caskroom/homebrew-versions
 
 # Install Homebrew packages
 brew install ack
-brew install spark
 brew install grc
 brew install git
 brew install hg

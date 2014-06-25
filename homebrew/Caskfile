@@ -26,6 +26,7 @@ cask install livereload 2> /dev/null
 cask install fantastical 2> /dev/null
 cask install sublime-text3 2> /dev/null
 cask install arduino 2> /dev/null
+cask install fritzing 2> /dev/null
 
 cask alfred link
 cask cleanup

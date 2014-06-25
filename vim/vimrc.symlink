@@ -114,7 +114,6 @@ if has("autocmd")
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
 
-  " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
 
@@ -122,8 +121,11 @@ if has("autocmd")
   au CursorHoldI * stopinsert
 
   " Filetype settings (tabs, spaces, etc.)
-  au FileType python,css setl et sts=4 ts=4 shiftwidth=4 tw=79
+  au FileType python,css,markdown setl et sts=4 ts=4 shiftwidth=4 tw=79
   au FileType ruby,javascript,html,xml setl et sts=2 ts=2 shiftwidth=2
+
+  " Improve Filetype detection
+  au BufNewFile,BufReadPost *.md set filetype=markdown
 
   " Always jump to the last known cursor position.
   au BufReadPost *
