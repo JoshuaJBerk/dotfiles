@@ -7,7 +7,13 @@ DOTFILES_ROOT=$(pwd)
 
 set -e
 
-echo ''
+echo ""
+echo "      _       _         __ _ _"
+echo "   __| | ___ | |_      / _(_) | ___  ___"
+echo "  / _\` |/ _ \| __|____| |_| | |/ _ \/ __|"
+echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
+echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
+echo ""
 
 info () {
   printf "  [ \033[00;34m..\033[0m ] $1"
@@ -123,13 +129,6 @@ install_dotfiles () {
   done
 }
 
-administrate () {
-  info sudo -v
-  # Keep-alive: update existing `sudo` time stamp until script has finished
-  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-}
-
-administrate
 setup_gitconfig
 install_dotfiles
 

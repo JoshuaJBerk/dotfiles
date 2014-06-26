@@ -7,10 +7,17 @@
 export ZSH=$HOME/.dotfiles
 
 # Initiate OS X Software Update
-softwareupdate --install --all
+softwareupdate --install --all 2>&1
+
+# Update Git Submodules
+cd ~/.dotfiles
+git submodule foreach git pull origin master 2> /dev/null
 
 # Set OS X defaults
-$ZSH/osx/set-defaults.sh
+$ZSH/osx/set-defaults.sh 2>&1
 
 # Install homebrew packages
 $ZSH/homebrew/install.sh 2>&1
+
+# Return to Prior Directory
+cd -

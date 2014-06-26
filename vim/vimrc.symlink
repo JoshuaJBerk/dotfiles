@@ -47,6 +47,7 @@ set foldmethod=syntax        " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
 set nospell                  " spelling correction mode
 set shm=a                    " avoid 'press Enter to continue'
+set mousehide                " hide pointer during typing, until moved
 
 " Backup
 set undofile                 " persistent save of undo history
@@ -81,10 +82,10 @@ vmap < <gv
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Arrow Keys
-noremap <DOWN> gj
-noremap <UP> gk
-noremap <LEFT> :bp<cr>
-noremap <RIGHT> :bn<cr>
+noremap <UP> gk<cr>     " Up the line
+noremap <DOWN> gj<cr>   " Down the line
+noremap <LEFT> :bp<cr>  " Back in Buffer
+noremap <RIGHT> :bn<cr> " Forward in Buffer
 inoremap <DOWN> <nop>
 inoremap <UP> <nop>
 inoremap <LEFT> <nop>
