@@ -16,6 +16,7 @@ Desktop.ini
 *~
 Thumbs.db
 *.swp
+*cache
 
 # Files that might appear on external disks
 .Spotlight-V100

@@ -17,9 +17,10 @@ set shiftround               " use multiple of shiftwidth with '<' and '>'
 set formatoptions+=tcqj      " see ':help fo-table' for details
 
 " Search/Substitution/Completion
+set hlsearch                 " highlight search results
+set incsearch                " do incremental searching
 set ignorecase               " removes case sensitivity by default
 set smartcase                " adding ≥1 uppercase = case sensitivity
-set incsearch                " do incremental searching
 set gdefault                 " substitute all matches in line (not first)
 set showmatch                " quickly jump to matching bracket
 set cot=menu,longest         " disable preview window on completion
@@ -35,19 +36,20 @@ set showbreak=↪\             " indicator for wrapped lines
 set nu rnu                   " add numbered lines (option: relativenumber)
 set ttyfast                  " improves redrawing
 set lazyredraw               " don't redraw during macros/etc.
-set scrolloff=3              " keep 3 lines off the edges during scroll
+set so=3 siso=0              " keep 3 lines off the edges during scroll
 set laststatus=2             " always display status bar
 set ruler                    " show the cursor position all the time
 set showmode                 " display Insert/Visual/etc.
 set showcmd                  " display incomplete commands
 set virtualedit=block        " allow cursor everywhere in V-Block mode
 set mouse=a                  " enable mouse support in the console
+set mousehide                " hide pointer during typing, until moved
 set encoding=utf-8           " UTF-8 encoding
 set foldmethod=syntax        " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
 set nospell                  " spelling correction mode
 set shm=a                    " avoid 'press Enter to continue'
-set mousehide                " hide pointer during typing, until moved
+set t_Co=256                 " pretty colors everywhere whooo!!
 
 " Backup
 set undofile                 " persistent save of undo history
@@ -82,8 +84,8 @@ vmap < <gv
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Arrow Keys
-noremap <UP> gk<cr>     " Up the line
-noremap <DOWN> gj<cr>   " Down the line
+noremap <UP> <nop>      " No operation.
+noremap <DOWN> <nop>    " No operation.
 noremap <LEFT> :bp<cr>  " Back in Buffer
 noremap <RIGHT> :bn<cr> " Forward in Buffer
 inoremap <DOWN> <nop>
@@ -103,17 +105,11 @@ nnoremap <leader><leader> <c-^>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-syntax on
-set hlsearch
-endif
-
 if has("autocmd")
   " Enable file type detection + use the default filetype settings
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
+  syntax on
 
   augroup vimrcEx
   au!
@@ -137,7 +133,7 @@ if has("autocmd")
   augroup END
 
 else
-  set autoindent    " always set autoindenting on
+  set autoindent
 endif " has("autocmd")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
