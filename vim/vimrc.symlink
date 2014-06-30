@@ -77,31 +77,31 @@ call pathogen#helptags()
 map Q q:
 
 " V-Mode Indenting Behavior
-vmap > >gv
-vmap < <gv
+vm > >gv
+vm < <gv
 
 " Redraw screen + remove search highlights
-nnoremap <C-L> :nohl<CR><C-L>
+nn <C-L> :nohl<CR><C-L>
 
 " Arrow Keys
-noremap <UP> <nop>      " No operation.
-noremap <DOWN> <nop>    " No operation.
-noremap <LEFT> :bp<cr>  " Back in Buffer
-noremap <RIGHT> :bn<cr> " Forward in Buffer
-inoremap <DOWN> <nop>
-inoremap <UP> <nop>
-inoremap <LEFT> <nop>
-inoremap <RIGHT> <nop>
+no <UP>  <Nop>
+no <DOWN>  <Nop>
+no <LEFT> <silent>:bp<cr>
+no <RIGHT> <silent>:bn<cr>
+ino <DOWN>  <Nop>
+ino <UP>  <Nop>
+ino <LEFT>  <Nop>
+ino <RIGHT>  <Nop>
 
 " Set MapLeaders
 let mapleader=","
 let maplocalleader = "\\"
 
 " Leader Key Maps
-nnoremap <silent><leader>rc :so ~/.vimrc<cr>
-nnoremap <silent><leader>pp :setlocal paste!<cr>
-nnoremap <silent><leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
-nnoremap <leader><leader> <c-^>
+nn <silent><leader>rc :so ~/.vimrc<cr>
+nn <silent><leader>pp :setlocal paste!<cr>
+nn <silent><leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
+nn <leader><leader> <c-^>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,9 +141,8 @@ endif " has("autocmd")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Color Scheme Modifications
-set background=dark
 highlight LineNr ctermfg=grey
-highlight SignColumn ctermbg=0
+highlight clear SignColumn
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
