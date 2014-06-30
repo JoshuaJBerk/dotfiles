@@ -98,6 +98,7 @@ let mapleader=","
 let maplocalleader = "\\"
 
 " Leader Key Maps
+nnoremap <silent><leader>rc :so ~/.vimrc<cr>
 nnoremap <silent><leader>pp :setlocal paste!<cr>
 nnoremap <silent><leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
 nnoremap <leader><leader> <c-^>
@@ -140,7 +141,9 @@ endif " has("autocmd")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Color Scheme Modifications
+set background=dark
 highlight LineNr ctermfg=grey
+highlight SignColumn ctermbg=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
