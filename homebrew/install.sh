@@ -29,8 +29,9 @@ brew install zsh
 brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql
-brew install hub
 brew install git-flow
+brew install hub
+brew install android-sdk
 
 # GNU Duplicates
 brew install coreutils --default-names
