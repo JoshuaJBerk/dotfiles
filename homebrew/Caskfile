@@ -1,8 +1,10 @@
 # Install native apps
 # Usage: `brew bundle ~/.dotfiles/homebrew/Caskfile`
 
+# Homebrew Cask
 install caskroom/cask/brew-cask
 
+# Programs
 cask install google-chrome 2> /dev/null
 cask install firefox 2> /dev/null
 cask install iterm2 2> /dev/null
@@ -28,5 +30,10 @@ cask install arduino 2> /dev/null
 cask install fritzing 2> /dev/null
 cask install android-studio 2> /dev/null
 
+# Fonts
+cask install font-inconsolata 2> /dev/null
+cask install font-source-code-pro 2> /dev/null
+
+# Wrap it up
 cask alfred link
 cask cleanup

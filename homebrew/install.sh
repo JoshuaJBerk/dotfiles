@@ -16,7 +16,8 @@ brew upgrade
 # Githup Repos as Formulae w/Taps
 brew tap homebrew/dupes
 brew tap caskroom/cask
-brew tap caskroom/homebrew-versions
+brew tap caskroom/versions
+brew tap caskroom/fonts
 
 # Install Homebrew packages
 brew install ack
@@ -26,11 +27,12 @@ brew install hg
 brew install wget
 brew install tree
 brew install zsh
+brew install hub
+brew install git-flow
+brew install ctags
 brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql
-brew install git-flow
-brew install hub
 brew install android-sdk
 
 # GNU Duplicates

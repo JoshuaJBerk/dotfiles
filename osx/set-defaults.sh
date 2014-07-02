@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 # Sets reasonable OS X defaults.
 
 # The original idea was grabbed from:

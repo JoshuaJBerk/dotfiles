@@ -140,9 +140,18 @@ endif " has("autocmd")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Change Background by Time of Day
+" let hour = strftime("%H")
+" if 7 <= hour && hour < 19
+"   set background=light
+" else
+"   set background=dark
+" endif
+
 " Color Scheme Modifications
-highlight LineNr ctermfg=grey
-highlight clear SignColumn
+hi LineNr ctermfg=grey
+hi clear SignColumn
+hi clear SpecialKey
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
