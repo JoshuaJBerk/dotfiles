@@ -24,7 +24,7 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
 defaults -currentHost write com.apple.screensaver '{ idleTime = 0; moduleDict = { moduleName = Arabesque; path = "/System/Library/Screen Savers/Arabesque.qtz"; type = 1; }; }';
 
 # Set standby delay 1 hour
-sudo pmset -a standbydelay 3600
+sudo pmset -a standbydelay 3600 2>/dev/null
 
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
@@ -409,13 +409,22 @@ defaults write com.apple.terminal StringEncodings -array 4e
 #defaults write org.x.X11 wm_ffm -bool true
 
 # ZSH as the Default Shell
-if [ -f /usr/local/bin/zsh ]
-then # Check Standard Shell File
-    if grep "/usr/local/bin/zsh" /etc/shells
-    then chsh -s /usr/local/bin/zsh
-    else echo /usr/local/bin/zsh >> /etc/shells
+if [ -f /usr/local/bin/zsh ]; then
+  # Check Standard Shell File
+  if grep -q "/usr/local/bin/zsh" /etc/shells; then
+    if [ $SHELL != /usr/local/bin/zsh ]; then
+    # Change to Homebrew zsh
+    chsh -s /usr/local/bin/zsh
     fi
-else chsh -s /bin/zsh # System Install (Instead)
+  else
+    # Add Homebrew ZSH to System Options
+    echo /usr/local/bin/zsh >> /etc/shells
+    # Change to Homebrew zsh
+    chsh -s /usr/local/bin/zsh
+  fi
+else
+   # System Install (Instead)
+   chsh -s /bin/zsh
 fi
 
 # Enable the WebKit Developer Tools in the Mac App Store
@@ -469,12 +478,9 @@ defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/App Store.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Dash.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
--defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Sublime Text.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Sublime Text.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-
-# Remove Applications from login
-osascript -e 'tell application "System Events" to delete login item "iTunesHelper"' > /dev/null 2>&1
 
 # Start Applications at login
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Alfred 2.app", hidden:true }' > /dev/null 2>&1
@@ -488,17 +494,10 @@ osascript -e 'tell application "System Events" to make new login item at end of 
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Transmit.app/Contents/MacOS/TransmitMenu.app", hidden:true }' > /dev/null 2>&1
 
 # Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
-ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+ln -sf /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 # PostgreSQL via Launchctl at Startup
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-
-# Reset Launchpad
-# find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
-
-# # Restore Wallpaper Settings DB
-# # Change picture every day, random order
-# cp ~/GoogleDrive/System/desktoppicture.db ~/Library/Application\ Support/Dock/desktoppicture.db
+ln -sf /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 
 ###############################################################################
 # Kill affected applications                                                  #

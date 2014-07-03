@@ -10,7 +10,7 @@ then
 fi
 
 # Update Homebrew & packages
-brew update
+sudo brew update
 brew upgrade
 
 # Githup Repos as Formulae w/Taps

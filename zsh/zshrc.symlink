@@ -11,6 +11,11 @@ then
   source ~/.localrc
 fi
 
+# colorize the iTerm!
+if [ $TERM_PROGRAM = iTerm.app ]; then
+  source $ZSH/bin/colorize
+fi
+
 # all of our zsh files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)

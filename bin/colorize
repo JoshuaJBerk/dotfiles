@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Colorize
+
+# What time is it?
+HOUR=`date +"%H"`
+
+# Change iTerm profile by Time of Day
+if [ "$HOUR" -ge "7" ] && [ "$HOUR" -le "19" ]; then
+  echo "\033]50;SetProfile=Day\a"
+else
+  echo "\033]50;SetProfile=Night\a"
+fi

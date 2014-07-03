@@ -61,7 +61,6 @@ set history=50               " # of commands to keep
 set ut=2000                  " time to initiate swap/CursorHold AU
 set autoread                 " updates VIM file if changed elsewhere
 set hidden                   " hide buffers instead of closing them
-set clipboard+=unnamed       " system clipboard by default
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,15 +140,15 @@ endif " has("autocmd")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Change Background by Time of Day
-" let hour = strftime("%H")
-" if 7 <= hour && hour < 19
-"   set background=light
-" else
-"   set background=dark
-" endif
+let hour = strftime("%H")
+if hour >= 7 && hour <= 19
+  set background=light
+else
+  set background=dark
+endif
 
 " Color Scheme Modifications
-hi LineNr ctermfg=grey
+colo Solarized
 hi clear SignColumn
 hi clear SpecialKey
 
