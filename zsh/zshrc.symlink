@@ -12,9 +12,7 @@ then
 fi
 
 # colorize the iTerm!
-if [ $TERM_PROGRAM = iTerm.app ]; then
-  source $ZSH/bin/colorize
-fi
+source $ZSH/bin/colorize
 
 # all of our zsh files
 typeset -U config_files

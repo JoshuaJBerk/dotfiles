@@ -1,30 +1,10 @@
-[submodule "vim.symlink/bundle/vim-surround"]
-	path = vim.symlink/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
-	ignore = dirty
-[submodule "vim.symlink/bundle/vim-commentary"]
-	path = vim.symlink/bundle/vim-commentary
-	url = ttps://github.com/tpope/vim-commentary.git
-	ignore = dirty
 [submodule "vim.symlink/bundle/tabular"]
 	path = vim.symlink/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
 	ignore = dirty
-[submodule "vim.symlink/bundle/vim-fugitive"]
-	path = vim.symlink/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-	ignore = dirty
-[submodule "vim.symlink/bundle/vim-unimpaired"]
-	path = vim.symlink/bundle/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired.git
-	ignore = dirty
 [submodule "vim.symlink/bundle/syntastic"]
 	path = vim.symlink/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
-	ignore = dirty
-[submodule "vim.symlink/bundle/vim-gitgutter"]
-	path = vim.symlink/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter
 	ignore = dirty
 [submodule "vim.symlink/bundle/dash.vim"]
 	path = vim.symlink/bundle/dash.vim
@@ -41,4 +21,28 @@
 [submodule "vim.symlink/bundle/lightline.vim"]
 	path = vim.symlink/bundle/lightline.vim
 	url = https://github.com/itchyny/lightline.vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/commentary"]
+	path = vim.symlink/bundle/commentary
+	url = https://github.com/tpope/vim-commentary.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/fugitive"]
+	path = vim.symlink/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/multiple-cursors"]
+	path = vim.symlink/bundle/multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/gitgutter"]
+	path = vim.symlink/bundle/gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/surround"]
+	path = vim.symlink/bundle/surround
+	url = https://github.com/tpope/vim-surround.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/unimpaired"]
+	path = vim.symlink/bundle/unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
 	ignore = dirty

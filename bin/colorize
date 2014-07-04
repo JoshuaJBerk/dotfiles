@@ -2,12 +2,19 @@
 #
 # Colorize
 
-# What time is it?
-HOUR=`date +"%H"`
+if [[ -z "$SSH_CLIENT" && "$TERM_PROGRAM" == "iTerm.app" ]]; then
 
-# Change iTerm profile by Time of Day
-if [ "$HOUR" -ge "7" ] && [ "$HOUR" -le "19" ]; then
-  echo "\033]50;SetProfile=Day\a"
-else
-  echo "\033]50;SetProfile=Night\a"
+  hour=$(date +"%H")
+
+  if [[ "$hour" -ge "7" && "$hour" -le "19" ]]; then
+    value="Day"
+  else
+    value="Night"
+  fi
+
+  if [[ -z "$TMUX" ]]; then
+    echo "\033]50;SetProfile=$value\a"
+  else
+    echo "\033Ptmux;\033\033]50;SetProfile=$value\a\033\\"
+  fi
 fi
