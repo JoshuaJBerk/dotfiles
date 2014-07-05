@@ -138,6 +138,7 @@ let maplocalleader = "\\"
 " Leader Key Maps
 map <leader>y "*y<cr>
 nn <leader><leader> <c-^>
+nn <silent><leader><space> <Nop>
 nn <silent><leader>rc :so ~/.vimrc<cr>
 nn <silent><leader>sf :call SortFile()<cr>
 nn <silent><leader>pp :setlocal paste!<cr>
