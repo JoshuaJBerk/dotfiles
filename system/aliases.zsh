@@ -8,3 +8,14 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
+
+# jump to recently used items
+if test $(which fasd)
+then
+  alias a='fasd -a' # any
+  alias s='fasd -si' # show / search / select
+  alias d='fasd -d' # directory
+  alias f='fasd -f' # file
+  alias z='fasd_cd -d' # cd, same functionality as j in autojump
+  alias zz='fasd_cd -d -i' # interactive directory jump
+fi

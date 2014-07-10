@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Branches ordered by most recent commit
+
+git for-each-ref --count=5 --sort=-committerdate refs/heads/ --format='%(refname:short)'

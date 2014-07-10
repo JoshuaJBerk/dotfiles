@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+
+git stash list --grep snapshot
