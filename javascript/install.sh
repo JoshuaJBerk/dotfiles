@@ -2,31 +2,16 @@
 #
 # Javascript
 
-# Checks/Installs NodeJS
-if test ! $(which node)
-then
-    echo " Installing Node.JS for you."
-    brew install node
-fi
+# Checks/Installs Node
+brew install node
 
 # Update Packages
 npm -g update
 
 # Node Packages
-if test ! $(which yo)
-    then npm install -g yo
-fi
-
-if test ! $(which bower)
-    then npm install -g bower
-fi
-
-if test ! $(which gulp)
-    then npm install -g gulp
-fi
-
-if test ! $(which cordova)
-    then npm install -g cordova
-fi
+npm install -g yo
+npm install -g bower
+npm install -g gulp
+npm install -g cordova
 
 exit 0

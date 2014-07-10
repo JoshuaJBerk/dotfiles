@@ -1,7 +1,7 @@
 # Use shell-style glob syntax
 syntax: glob
 
-# Compiled Python files
+# Compiled files
 *.pyc
 
 # Folder view configuration files
@@ -12,11 +12,14 @@ Desktop.ini
 .LSOverride
 
 # Cache files
+[._]*.s[a-w][a-z]
 ._*
+*.un~
 *~
 Thumbs.db
-*.swp
 *cache
+Session.vim
+tags
 
 # Files that might appear on external disks
 .Spotlight-V100

@@ -7,6 +7,7 @@
 " Vim Defaults
 set nocompatible             " vim settings, rather than vi
 set nomodeline               " avoid self-executed security vulnerabilities
+set secure                   " prevent auto-commands in foreign files
 
 " Indentation + Formatting
 set expandtab                " use spaces, not tabs
@@ -26,8 +27,6 @@ set gdefault                 " substitute all matches in line (not first)
 set showmatch                " quickly jump to matching bracket
 set cpt=.,w,b,u,t,i          " complete from buffers, files, and tags
 set cot=menu,longest         " disable preview window on completion
-set wmnu                     " command-mode tab to auto-complete
-set wim=longest:full,full    " wildmode: complete & list full matches
 set wig+=tmp/**              " wildmode: ignore tmp files
 
 " View
@@ -36,32 +35,34 @@ set list                     " display formatting characters
 set wrap                     " wrap lines
 set showbreak=↪\             " indicator for wrapped lines
 set nu rnu                   " add numbered lines (option: relativenumber)
+set so=3 siso=0              " keep 3 lines off the edges during scroll
+set nospell                  " spelling correction mode
 set ttyfast                  " improves redrawing
 set lazyredraw               " don't redraw during macros/etc.
-set so=3 siso=0              " keep 3 lines off the edges during scroll
-set laststatus=2             " always display status bar
 set nosol                    " leave the cursor alone, Vim!
-set ruler                    " show the cursor position all the time
+set ruler                    " display cursor position all the time
 set cul                      " cursorline highlighting
+set virtualedit=block        " allow cursor everywhere in V-Block mode
+set laststatus=2             " always display status bar
+set report=0                 " display all file changes
 set showmode                 " display Insert/Visual/etc.
 set showcmd                  " display incomplete commands
-set virtualedit=block        " allow cursor everywhere in V-Block mode
+set title                    " filename in the window bar
 set mouse=a                  " enable mouse support in the console
 set mousehide                " hide pointer during typing, until moved
 set encoding=utf-8           " UTF-8 encoding
 set foldmethod=syntax        " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
-set nospell                  " spelling correction mode
-set shm=a                    " avoid 'press Enter to continue'
+set shm+=aI                  " avoid 'press Enter to continue'
 set t_Co=256                 " pretty colors everywhere whooo!!
 set spr sb                   " split windows open below/right
 
 " Backup
 set undofile                 " persistent save of undo history
-set udir=~/.vim/cache        " store undo in dotfiles
-set bdir=~/.vim/cache        " store backup in dotfiles
-set vdir=~/.vim/cache        " store views in dotfiles
-set dir=~/.vim/cache         " store swap in dotfiles
+set udir=$TMPDIR             " store undo in System TMP Directory
+set bdir=$TMPDIR             " store backup in System TMP Directory
+set vdir=$TMPDIR             " store views in System TMP Directory
+set dir=$TMPDIR              " store swap in System TMP Directory
 set history=50               " # of commands to keep
 set ut=2000                  " time to initiate swap/CursorHold AU
 set autoread                 " updates VIM file if changed elsewhere
@@ -77,6 +78,13 @@ call pathogen#helptags()
 
 " Macros
 runtime macros/matchit.vim
+
+" Plugins
+let g:neocomplete#enable_at_startup = 1
+let g:investigate_use_dash=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_signs=1
+let g:sneak#streak = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions                                                                  "
@@ -113,36 +121,58 @@ endfunction
 no Q q:
 
 " Tab For All The Things!
-ino <tab> <c-r>=InsertTabWrapper()<cr>
-
-" Force root permission saves
-cno w!! w !sudo tee % >/dev/null
+ino <tab> <c-r>=InsertTabWrapper()<CR>
 
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
+
+" Force root permission saves
+cmap w!! w !sudo tee > /dev/null %
 
 " Line Navigation
 no H ^
 no L g_
 
-" Arrow Keys
-no <UP>  <Nop>
-no <DOWN>  <Nop>
-no <LEFT> <silent>:bp<cr>
-no <RIGHT> <silent>:bn<cr>
+" Reselect Visual Block after Indent/Outdent
+vn < <gv
+vn > >gv
 
 " Set MapLeaders
 let mapleader=","
 let maplocalleader = "\\"
 
 " Leader Key Maps
-map <leader>y "*y<cr>
+map <leader>y "*y<CR>
 nn <leader><leader> <c-^>
 nn <silent><leader><space> <Nop>
-nn <silent><leader>rc :so ~/.vimrc<cr>
-nn <silent><leader>sf :call SortFile()<cr>
-nn <silent><leader>pp :setlocal paste!<cr>
-nn <silent><leader>W :call ClearWhitespace()<CR>
+nn <silent><leader>; <Nop>
+nn <silent><leader>/ <Nop>
+nn <silent><leader>ul :t.<CR>Vr=
+nn <silent><leader>cd :lcd %:h<CR>
+nn <silent><leader>rc :so ~/.vimrc<CR>
+nn <silent><leader>ss :setlocal spell!<CR>
+nn <silent><leader>sp :setlocal paste!<CR>
+nn <silent><leader>sf :call SortFile()<CR>
+nn <silent><leader>ww :call ClearWhitespace()<CR>
+nn <silent><leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
+nn <silent><leader>q/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nn <silent><leader>fef :normal! gg=G``<CR>
+
+" Plugin Key Maps
+no <leader>a :Ack<space>
+no <leader>t :Tabularize /
+no <leader>k :call investigate#Investigate()<CR>
+no <silent><leader>nt :NERDTreeToggle<CR>
+no <silent><leader>tt :TagbarToggle<CR>
+no <silent><leader>ut :GundoToggle<CR>
+no <silent><leader>gg :GitGutterToggle<CR>
+no <silent><leader>gs :Gstatus<CR>
+no <silent><leader>gd :Gdiff<CR>
+no <silent><leader>gc :Gcommit<CR>
+no <silent><leader>gb :Gblame<CR>
+no <silent><leader>gl :Glog<CR>
+no <silent><leader>gp :Git push<CR>
+no <silent><leader>xt :XtermColorTable<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto Commands                                                              "
@@ -176,9 +206,7 @@ if has("autocmd")
 
   augroup END
 
-else
-  set autoindent
-endif " has("autocmd")
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color Scheme                                                               "
@@ -194,7 +222,6 @@ endif
 
 " Modifications
 colo Solarized
-hi StatusLine term=bold ctermfg=236 ctermbg=231
 hi clear SignColumn
 hi clear SpecialKey
 

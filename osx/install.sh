@@ -27,13 +27,16 @@ brew install hg
 brew install wget
 brew install tree
 brew install zsh
+brew install fasd
 brew install hub
+brew install ghi
 brew install git-flow
 brew install ctags
 brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql
 brew install android-sdk
+brew install reattach-to-user-namespace
 
 # GNU Duplicates
 brew install coreutils --default-names
@@ -47,7 +50,7 @@ brew install gnu-getopt --default-names
 brew install grep --default-names
 
 # Install more recent versions of some OS X tools
-brew install vim --override-system-vi
+brew install vim --with-lua --override-system-vi
 
 # Remove temporary install files
 brew cleanup

@@ -6,10 +6,6 @@
 	path = vim.symlink/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
 	ignore = dirty
-[submodule "vim.symlink/bundle/dash.vim"]
-	path = vim.symlink/bundle/dash.vim
-	url = https://github.com/rizzatti/dash.vim.git
-	ignore = dirty
 [submodule "vim.symlink/bundle/ack.vim"]
 	path = vim.symlink/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
@@ -34,10 +30,6 @@
 	path = vim.symlink/bundle/multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
 	ignore = dirty
-[submodule "vim.symlink/bundle/gitgutter"]
-	path = vim.symlink/bundle/gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-	ignore = dirty
 [submodule "vim.symlink/bundle/surround"]
 	path = vim.symlink/bundle/surround
 	url = https://github.com/tpope/vim-surround.git
@@ -45,4 +37,44 @@
 [submodule "vim.symlink/bundle/unimpaired"]
 	path = vim.symlink/bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/tagbar"]
+	path = vim.symlink/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/neocomplete.vim"]
+	path = vim.symlink/bundle/neocomplete.vim
+	url = https://github.com/Shougo/neocomplete.vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/nerdtree"]
+	path = vim.symlink/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/golden-ratio"]
+	path = vim.symlink/bundle/golden-ratio
+	url = https://github.com/roman/golden-ratio.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/gundo.vim"]
+	path = vim.symlink/bundle/gundo.vim
+	url = https://github.com/sjl/gundo.vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/gitgutter"]
+	path = vim.symlink/bundle/gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/xterm-color-table"]
+	path = vim.symlink/bundle/xterm-color-table
+	url = https://github.com/guns/xterm-color-table.vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/investigate"]
+	path = vim.symlink/bundle/investigate
+	url = https://github.com/Keithbsmiley/investigate.vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/delimitMate"]
+	path = vim.symlink/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/sneak"]
+	path = vim.symlink/bundle/sneak
+	url = https://github.com/justinmk/vim-sneak.git
 	ignore = dirty
