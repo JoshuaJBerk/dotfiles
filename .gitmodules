@@ -58,10 +58,6 @@
 	path = vim.symlink/bundle/gundo.vim
 	url = https://github.com/sjl/gundo.vim.git
 	ignore = dirty
-[submodule "vim.symlink/bundle/gitgutter"]
-	path = vim.symlink/bundle/gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-	ignore = dirty
 [submodule "vim.symlink/bundle/xterm-color-table"]
 	path = vim.symlink/bundle/xterm-color-table
 	url = https://github.com/guns/xterm-color-table.vim.git

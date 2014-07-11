@@ -2,16 +2,18 @@
 #
 # Javascript
 
-# Checks/Installs Node
-brew install node
-
-# Update Packages
-npm -g update
+# Checks/Installs Node Version Manager
+brew install nvm
 
 # Node Packages
-npm install -g yo
-npm install -g bower
-npm install -g gulp
-npm install -g cordova
+if (( $+commands[npm] )); then
+  npm -g update
+  npm install -g yo
+  npm install -g bower
+  npm install -g gulp
+  npm install -g cordova
+  npm install -g jshint
+  npm install -g csslint
+fi
 
 exit 0

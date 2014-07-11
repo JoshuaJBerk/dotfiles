@@ -444,8 +444,10 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
 
 ###############################################################################
-# First System Boot: WARNING -- THESE SETTINGS ARE SPECIFIC FOR JOSHUAJBERK   #
+# First System Boot: WARNING -- THESE SETTINGS ARE SPECIFIC FOR JOSHUABERK    #
 ###############################################################################
+
+if [ $USER = "joshuaberk" ]; then
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "JJB-AIR"
@@ -498,6 +500,8 @@ ln -sf /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/loca
 
 # PostgreSQL via Launchctl at Startup
 ln -sf /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+
+fi
 
 ###############################################################################
 # Kill affected applications                                                  #

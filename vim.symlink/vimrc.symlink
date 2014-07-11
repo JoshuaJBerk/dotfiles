@@ -12,11 +12,19 @@ set secure                   " prevent auto-commands in foreign files
 " Indentation + Formatting
 set expandtab                " use spaces, not tabs
 set smarttab                 " insert tabs @ line start re: shiftwidth
-set tabstop=4                " display tabs as X spaces
-set softtabstop=4            " insert mode creates X spaces
-set shiftwidth=4             " reindent operations (<< && >>)
+set autoindent               " copy the previous line indent
+set tabstop=2                " display tabs as X spaces
+set softtabstop=2            " insert mode creates X spaces
+set shiftwidth=2             " reindent operations (<< && >>)
 set shiftround               " use multiple of shiftwidth with '<' and '>'
 set formatoptions+=tcqj      " see ':help fo-table' for details
+set nojs                     " join lines w/one space only
+set encoding=utf-8           " UTF-8 encoding
+set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
+set list                     " display formatting characters
+set wrap                     " wrap lines
+set showbreak=↪\             " indicator for wrapped lines
+set nospell                  " spelling correction mode
 
 " Search/Substitution/Completion
 set hlsearch                 " highlight search results
@@ -30,16 +38,11 @@ set cot=menu,longest         " disable preview window on completion
 set wig+=tmp/**              " wildmode: ignore tmp files
 
 " View
-set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
-set list                     " display formatting characters
-set wrap                     " wrap lines
-set showbreak=↪\             " indicator for wrapped lines
 set nu rnu                   " add numbered lines (option: relativenumber)
 set so=3 siso=0              " keep 3 lines off the edges during scroll
-set nospell                  " spelling correction mode
 set ttyfast                  " improves redrawing
 set lazyredraw               " don't redraw during macros/etc.
-set nosol                    " leave the cursor alone, Vim!
+set nosol                    " keep the scrolling cursor position
 set ruler                    " display cursor position all the time
 set cul                      " cursorline highlighting
 set virtualedit=block        " allow cursor everywhere in V-Block mode
@@ -50,12 +53,12 @@ set showcmd                  " display incomplete commands
 set title                    " filename in the window bar
 set mouse=a                  " enable mouse support in the console
 set mousehide                " hide pointer during typing, until moved
-set encoding=utf-8           " UTF-8 encoding
 set foldmethod=syntax        " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
 set shm+=aI                  " avoid 'press Enter to continue'
 set t_Co=256                 " pretty colors everywhere whooo!!
 set spr sb                   " split windows open below/right
+set cmdheight=1              " single line CLI
 
 " Backup
 set undofile                 " persistent save of undo history
@@ -63,7 +66,7 @@ set udir=$TMPDIR             " store undo in System TMP Directory
 set bdir=$TMPDIR             " store backup in System TMP Directory
 set vdir=$TMPDIR             " store views in System TMP Directory
 set dir=$TMPDIR              " store swap in System TMP Directory
-set history=50               " # of commands to keep
+set history=1000             " # of commands to keep
 set ut=2000                  " time to initiate swap/CursorHold AU
 set autoread                 " updates VIM file if changed elsewhere
 set hidden                   " hide buffers instead of closing them
@@ -81,9 +84,7 @@ runtime macros/matchit.vim
 
 " Plugins
 let g:neocomplete#enable_at_startup = 1
-let g:investigate_use_dash=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_enable_signs=1
+let g:investigate_use_dash = 1
 let g:sneak#streak = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -105,6 +106,16 @@ function! SortFile()
   normal! v`z
 endfunction
 
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+      redraw!
+  endif
+endfunction
+
 function! ClearWhitespace()
   normal mz
   silent! %s/\s\+$//
@@ -120,18 +131,18 @@ endfunction
 " Use Q for VIM CLI History
 no Q q:
 
+" Line Navigation
+no H ^
+no L g_
+
 " Tab For All The Things!
 ino <tab> <c-r>=InsertTabWrapper()<CR>
 
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
 
-" Force root permission saves
-cmap w!! w !sudo tee > /dev/null %
-
-" Line Navigation
-no H ^
-no L g_
+" Search for visually highlighted text + characters
+vm <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 
 " Reselect Visual Block after Indent/Outdent
 vn < <gv
@@ -148,12 +159,15 @@ nn <silent><leader><space> <Nop>
 nn <silent><leader>; <Nop>
 nn <silent><leader>/ <Nop>
 nn <silent><leader>ul :t.<CR>Vr=
-nn <silent><leader>cd :lcd %:h<CR>
+nn <silent><leader>cd :lcd %:p:h<CR>
 nn <silent><leader>rc :so ~/.vimrc<CR>
-nn <silent><leader>ss :setlocal spell!<CR>
-nn <silent><leader>sp :setlocal paste!<CR>
+nn <silent><leader>sp :setlocal spell!<CR>
+nn <silent><leader>pp :setlocal paste!<CR>
 nn <silent><leader>sf :call SortFile()<CR>
-nn <silent><leader>ww :call ClearWhitespace()<CR>
+nn <silent><leader>rn :call RenameFile()<CR>
+nn <silent><leader>W :call ClearWhitespace()<CR>
+nn <silent><leader>ww :w !sudo tee > /dev/null %<CR>
+nn <silent><leader>it a<c-r>=strftime('%F %H:%M:%S.0 %z')<CR>
 nn <silent><leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 nn <silent><leader>q/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 nn <silent><leader>fef :normal! gg=G``<CR>
@@ -161,7 +175,9 @@ nn <silent><leader>fef :normal! gg=G``<CR>
 " Plugin Key Maps
 no <leader>a :Ack<space>
 no <leader>t :Tabularize /
+no <leader>e :Errors<CR>
 no <leader>k :call investigate#Investigate()<CR>
+no <silent><leader>st :SyntasticToggleMode<CR>
 no <silent><leader>nt :NERDTreeToggle<CR>
 no <silent><leader>tt :TagbarToggle<CR>
 no <silent><leader>ut :GundoToggle<CR>
@@ -209,7 +225,7 @@ if has("autocmd")
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color Scheme                                                               "
+" Miscellaneous                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Change Background by Time of Day
@@ -220,10 +236,8 @@ else
   set background=dark
 endif
 
-" Modifications
+" Color Scheme
 colo Solarized
-hi clear SignColumn
-hi clear SpecialKey
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End of Settings                                                            "
