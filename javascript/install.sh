@@ -6,7 +6,8 @@
 brew install nvm
 
 # Node Packages
-if (( $+commands[npm] )); then
+if test $(which npm)
+then
   npm -g update
   npm install -g yo
   npm install -g bower

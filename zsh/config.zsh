@@ -1,10 +1,13 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
+export EDITOR='vim'
+export VISUAL='vim'
+export LANG="en_US.UTF-8"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 fpath=($ZSH/functions $fpath)
 
 autoload -U $ZSH/functions/*(:t)
-autoload -U zmv # zsh builtin bulk rename
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -24,7 +27,7 @@ setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
 
 setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # incrementally share history across sessions
 setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
 
@@ -34,10 +37,4 @@ setopt complete_aliases
 
 zle -N newtab
 
-bindkey '^[^[[D' backward-word
-bindkey '^[^[[C' forward-word
-bindkey '^[[5D' beginning-of-line
-bindkey '^[[5C' end-of-line
-bindkey '^[[3~' delete-char
-bindkey '^[^N' newtab
-bindkey '^?' backward-delete-char
+bindkey -e #Emacs ZSH keybindings (default)

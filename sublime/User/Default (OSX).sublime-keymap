@@ -9,9 +9,6 @@
     { "keys": ["super+v"], "command": "paste_and_indent" },
     { "keys": ["super+shift+v"], "command": "paste" },
 
-    // [HTMLPrettify] Format your HTML, CSS, and JS
-    { "keys": ["super+shift+h"], "command": "htmlprettify" },
-
     // Close tag
     { "keys": ["super+."], "command": "close_tag" },
 

@@ -1,5 +1,5 @@
 # Install native apps
-# Usage: `brew bundle ~/.dotfiles/homebrew/Caskfile`
+# Usage: `brew bundle ~/.dotfiles/osx/Caskfile`
 
 # Homebrew Cask
 install caskroom/cask/brew-cask
@@ -23,7 +23,6 @@ cask install google-drive 2> /dev/null
 cask install vagrant 2> /dev/null
 cask install dash 2> /dev/null
 cask install cloud 2> /dev/null
-cask install transmit 2> /dev/null
 cask install livereload 2> /dev/null
 cask install fantastical 2> /dev/null
 cask install sublime-text3 2> /dev/null

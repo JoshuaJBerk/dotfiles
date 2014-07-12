@@ -7,4 +7,7 @@ if test ! $(which python3)
 then brew install python3
 fi
 
+# Packages
+pip3 install pylint --upgrade
+
 exit 0

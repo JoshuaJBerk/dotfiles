@@ -52,8 +52,9 @@ brew install grep --default-names
 # Install more recent versions of some OS X tools
 brew install vim --with-lua --override-system-vi
 
-# Remove temporary install files
+# Remove temporary install files + fix links
 brew cleanup
+brew prune
 brew tap --repair 
 
 exit 0

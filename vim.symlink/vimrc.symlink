@@ -1,5 +1,3 @@
-" Maintainer: Joshua Berk <joshua.j.berk@gmail.com>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Settings                                                             "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,7 +30,7 @@ set incsearch                " do incremental searching
 set ignorecase               " removes case sensitivity by default
 set smartcase                " adding ≥1 uppercase = case sensitivity
 set gdefault                 " substitute all matches in line (not first)
-set showmatch                " quickly jump to matching bracket
+set showmatch mat=5          " quickly jump to matching bracket
 set cpt=.,w,b,u,t,i          " complete from buffers, files, and tags
 set cot=menu,longest         " disable preview window on completion
 set wig+=tmp/**              " wildmode: ignore tmp files
