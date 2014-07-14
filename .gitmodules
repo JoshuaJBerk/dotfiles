@@ -74,3 +74,15 @@
 	path = vim.symlink/bundle/sneak
 	url = https://github.com/justinmk/vim-sneak.git
 	ignore = dirty
+[submodule "vim.symlink/bundle/rainbow-parentheses"]
+	path = vim.symlink/bundle/rainbow-parentheses
+	url = https://github.com/kien/rainbow_parentheses.vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/emmet"]
+	path = vim.symlink/bundle/emmet
+	url = https://github.com/mattn/emmet-vim.git
+	ignore = dirty
+[submodule "vim.symlink/bundle/webapi"]
+	path = vim.symlink/bundle/webapi
+	url = https://github.com/mattn/webapi-vim.git
+	ignore = dirty

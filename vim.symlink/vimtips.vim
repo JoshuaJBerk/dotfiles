@@ -36,8 +36,6 @@ __BEGIN__
 /fred\_s*joe/                     : any whitespace including newline *C*
 /bugs\(\_.\)*bunny                : bugs followed by bunny anywhere in file
 :h \_                             : help
-" search for declaration of subroutine/function under cursor
-:nmap gx yiw/^\(sub\<bar>function\)\s\+<C-R>"<CR>
 " multiple file search
 :bufdo /searchstr/                : use :rewind to recommence search
 " multiple file search better but cheating
@@ -112,7 +110,6 @@ __BEGIN__
 :%s/\v(.*\n){5}/&\r         : insert a blank line every 5 lines [N]
 " Calling a VIM function
 :s/__date__/\=strftime("%c")/ : insert datestring
-:inoremap \zd <C-R>=strftime("%d%b%y")<CR>    : insert date eg 31Jan11 [N]
 " Working with Columns sub any str1 in col3
 :%s:\(\(\w\+\s\+\)\{2}\)str1:\1str2:
 " Swapping first & last column (4 columns)
@@ -700,20 +697,6 @@ gv                                : Re-select the previous visual area (ULTRA)
 :%s/^/\=strpart(line(".")."     ", 0, 5)
 :%s/^/\=line('.'). ' '
 ----------------------------------------
-" *numbering lines VIM way*
-:set number                       : show line numbers
-:map <F12> :set number!<CR>       : Show linenumbers flip-flop
-:%s/^/\=strpart(line('.')."        ",0,&ts)
-" numbering lines (need Perl on PC) starting from arbitrary number
-:'a,'b!perl -pne 'BEGIN{$a=223} substr($_,2,0)=$a++'
-" Produce a list of numbers
-" Type in number on line say 223 in an empty file
-qqmnYP`n^Aq                       : in recording q repeat with @q
-" increment existing numbers to end of file (type <c-a> as 5 characters)
-:.,$g/^\d/exe "normal! \<c-a>"
-" advanced incrementing
-http://vim.sourceforge.net/tip_view.php?tip_id=150
-----------------------------------------
 " *advanced incrementing* (really useful)
 " put following in _vimrc
 let g:I=0
@@ -922,16 +905,6 @@ Closing tag >>>
 ----------------------------------------
 "installing/getting latest version of vim on Linux (replace tiny-vim) [N]
 yum install vim-common vim-enhanced vim-minimal
-----------------------------------------
-# using gVIM with Cygwin on a Windows PC
-if has('win32')
-source $VIMRUNTIME/mswin.vim
-behave mswin
-set shell=c:\\cygwin\\bin\\bash.exe shellcmdflag=-c shellxquote=\"
-endif
-----------------------------------------
-" *Just Another Vim Hacker JAVH*
-vim -c ":%s%s*%Cyrnfr)fcbafbe[Oenz(Zbbyranne%|:%s)[[()])-)Ig|norm Vg?"
 ----------------------------------------
 vim:tw=78:ts=8:ft=help:norl:
 __END__
