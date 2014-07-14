@@ -139,6 +139,9 @@ ino <tab> <c-r>=InsertTabWrapper()<CR>
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
 
+" Search for declaration of subroutine/function under cursor
+nm gx yiw/^\(sub\<bar>function\)\s\+<C-R>"<CR>
+
 " Search for visually highlighted text + characters
 vm <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 
