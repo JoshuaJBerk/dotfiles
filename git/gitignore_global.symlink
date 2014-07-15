@@ -4,30 +4,30 @@ syntax: glob
 # Compiled files
 *.pyc
 
-# Folder view configuration files
-.DS_Store
-.localized
-Desktop.ini
-.AppleDouble
-.LSOverride
-
 # Cache files
-[._]*.s[a-w][a-z]
-._*
-*.un~
-*~
-Thumbs.db
 *cache
-Session.vim
 tags
 
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes
+# VIM
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
 
-# Directories potentially created on remote AFP share
+# OSX
 .AppleDB
 .AppleDesktop
 Network Trash Folder
 Temporary Items
 .apdisk
+.Spotlight-V100
+.Trashes
+._*
+Thumbs.db
+.DS_Store
+.localized
+Desktop.ini
+.AppleDouble
+.LSOverride

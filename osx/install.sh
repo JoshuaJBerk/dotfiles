@@ -32,6 +32,7 @@ brew install hub
 brew install ghi
 brew install git-flow
 brew install ctags
+brew install docker
 brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql

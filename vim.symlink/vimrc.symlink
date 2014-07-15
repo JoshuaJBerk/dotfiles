@@ -143,12 +143,6 @@ nn <C-L> :nohl<CR><C-L>
 vn < <gv
 vn > >gv
 
-" Arrow Keys
-nn <silent><UP> :bn<CR>
-nn <silent><Down> :bp<CR>
-nn <silent><Left> :earlier<CR>
-nn <silent><Right> :later<CR>
-
 " Set MapLeaders
 let mapleader=","
 let maplocalleader = "\\"
@@ -156,6 +150,7 @@ let maplocalleader = "\\"
 " Leader Key Maps
 map <leader>y "*y
 nn <leader><leader> <c-^>
+vn <leader>r "ry:%s/<C-r>r/
 nn <silent><leader><space> <Nop>
 nn <silent><leader>; <Nop>
 nn <silent><leader>ul :t.<CR>Vr=
@@ -164,7 +159,6 @@ nn <silent><leader>rc :so ~/.vimrc<CR>
 nn <silent><leader>fef :normal! gg=G``<CR>
 nn <silent><leader>sp :setlocal spell!<CR>
 nn <silent><leader>pp :setlocal paste!<CR>
-nn <silent><leader>fef :normal! gg=G``<CR>
 nn <silent><leader>sf :call SortFile()<CR>
 nn <silent><leader>rn :call RenameFile()<CR>
 nn <silent><leader>W :call ClearWhitespace()<CR>
@@ -177,6 +171,7 @@ vn <silent><leader>/ y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 no <leader>a :Ack<space>
 no <leader>t :Tabularize /
 no <leader>e :Errors<CR>
+no <leader>g :Gist<CR>
 no <leader>k :call investigate#Investigate()<CR>
 no <silent><leader>rt :RainbowParenthesesToggle<CR>
 no <silent><leader>st :SyntasticToggleMode<CR>
