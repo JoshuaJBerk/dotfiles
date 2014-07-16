@@ -12,4 +12,7 @@ then
   brew install ruby-build > /tmp/ruby-build-install.log
 fi
 
+# Update System Gems
+gem update
+
 exit 0

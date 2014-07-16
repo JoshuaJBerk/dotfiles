@@ -31,7 +31,9 @@ brew install fasd
 brew install hub
 brew install ghi
 brew install git-flow
+brew install cmake
 brew install ctags
+brew install p7zip
 brew install docker
 brew install libyaml
 brew install heroku-toolbelt
@@ -55,7 +57,6 @@ brew install vim --with-lua --override-system-vi
 
 # Remove temporary install files + fix links
 brew cleanup
-brew prune
 brew tap --repair 
 
 exit 0

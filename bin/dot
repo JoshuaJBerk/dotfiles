@@ -15,8 +15,3 @@ if [ "$(uname -s)" == "Darwin" ]; then
   $ZSH/osx/set-defaults.sh 2>&1
   brew bundle $ZSH/osx/Caskfile
 fi
-
-# Update Git Submodules
-cd $ZSH
-git submodule foreach git pull origin master 2> /dev/null
-cd -

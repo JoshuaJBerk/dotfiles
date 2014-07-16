@@ -102,5 +102,6 @@ setw -g window-status-current-attr bright
 # scheme (styled as powerline)
 set -g status-left-length 50
 set -g status-left '#[fg=default,bold] #S #I:#P #[fg=colour252,bg=default,nobold]#[fg=colour245,bg=colour238,bold] #(whoami) #[fg=colour238,bg=default,nobold]'
+set -g status-right ''
 set -g window-status-format "#[fg=colour235,bg=colour252,bold] #I #W "
 set -g window-status-current-format "#[fg=colour234,bg=colour39]#[fg=black,bg=colour39,noreverse,bold] #I: #W #[fg=colour39,bg=colour234,nobold]"

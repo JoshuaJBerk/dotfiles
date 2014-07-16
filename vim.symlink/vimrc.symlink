@@ -4,7 +4,7 @@
 
 " Vim Defaults
 set nocompatible             " vim settings, rather than vi
-set nomodeline               " avoid self-executed security vulnerabilities
+set modeline                 " allow self-executed file-specific settings
 set secure                   " prevent auto-commands in foreign files
 
 " Indentation + Formatting
@@ -66,22 +66,53 @@ set vdir=$TMPDIR             " store views in System TMP Directory
 set dir=$TMPDIR              " store swap in System TMP Directory
 set history=1000             " # of commands to keep
 set ut=2000                  " time to initiate swap/CursorHold AU
-set autoread                 " updates VIM file if changed elsewhere
+set autoread autowrite       " continuous VIM file updates
 set hidden                   " hide buffers instead of closing them
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" initiate w/pathogen package manager
-call pathogen#infect()
-call pathogen#helptags()
-
-" Macros
-runtime macros/matchit.vim
+" Vundle
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-eunuch'
+Plugin 'justinmk/vim-sneak.git'
+Plugin 'godlygeek/tabular.git'
+Plugin 'majutsushi/tagbar.git'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Raimondi/delimitMate.git'
+Plugin 'kien/rainbow_parentheses.vim.git'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'mattn/emmet-vim.git'
+Plugin 'mattn/webapi-vim.git'
+Plugin 'mattn/gist-vim.git'
+Plugin 'edsono/vim-matchit'
+Plugin 'roman/golden-ratio.git'
+Plugin 'Keithbsmiley/investigate.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'guns/xterm-color-table.vim'
+Plugin 'sjl/gundo.vim.git'
+Plugin 'mileszs/ack.vim.git'
+Plugin 'itchyny/lightline.vim'
+call vundle#end()
 
 " Plugins
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_auto_select = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
 let g:investigate_use_dash = 1
 let g:sneak#streak = 1
 
@@ -92,9 +123,9 @@ let g:sneak#streak = 1
 function! InsertTabWrapper()
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
+    return "\<TAB>"
   else
-    return "\<c-p>"
+    return "\<C-p>"
   endif
 endfunction
 
@@ -102,16 +133,6 @@ function! SortFile()
   normal! mzggvG
   :sort ui
   normal! v`z
-endfunction
-
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-      redraw!
-  endif
 endfunction
 
 function! ClearWhitespace()
@@ -134,10 +155,13 @@ no H ^
 no L g_
 
 " Tab For All The Things!
-ino <tab> <c-r>=InsertTabWrapper()<CR>
+ino <TAB> <C-R>=InsertTabWrapper()<CR>
 
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
+
+" Yank to EOL
+nn Y y$
 
 " Reselect Visual Block after Indent/Outdent
 vn < <gv
@@ -149,29 +173,30 @@ let maplocalleader = "\\"
 
 " Leader Key Maps
 map <leader>y "*y
-nn <leader><leader> <c-^>
-vn <leader>r "ry:%s/<C-r>r/
-nn <silent><leader><space> <Nop>
+nn <leader><leader> <C-^>
+vn <leader>r "ry:%s/<C-R>r/
+nn <silent><leader><SPACE> <Nop>
 nn <silent><leader>; <Nop>
 nn <silent><leader>ul :t.<CR>Vr=
 nn <silent><leader>cd :lcd %:p:h<CR>
 nn <silent><leader>rc :so ~/.vimrc<CR>
 nn <silent><leader>fef :normal! gg=G``<CR>
-nn <silent><leader>sp :setlocal spell!<CR>
-nn <silent><leader>pp :setlocal paste!<CR>
+nn <silent><leader>sp :setl spell!<CR>
+nn <silent><leader>pp :setl paste!<CR>
 nn <silent><leader>sf :call SortFile()<CR>
-nn <silent><leader>rn :call RenameFile()<CR>
 nn <silent><leader>W :call ClearWhitespace()<CR>
-nn <silent><leader>ww :w !sudo tee > /dev/null %<CR>
-nn <silent><leader>it a<c-r>=strftime('%F %H:%M:%S.0 %z')<CR>
-nn <silent><leader>q/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nn <silent><leader>it a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
 vn <silent><leader>/ y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 
-" Plugin Key Maps
-no <leader>a :Ack<space>
+" Plugin Leader Key Maps
+no <leader>a :Ack<SPACE>
 no <leader>t :Tabularize /
 no <leader>e :Errors<CR>
 no <leader>g :Gist<CR>
+no <leader>mv :Move<SPACE>
+no <leader>rn :Rename<SPACE>
+no <leader>sw :SudoWrite<CR>
+no <leader>pu :PluginUpdate<CR>
 no <leader>k :call investigate#Investigate()<CR>
 no <silent><leader>rt :RainbowParenthesesToggle<CR>
 no <silent><leader>st :SyntasticToggleMode<CR>
@@ -186,6 +211,11 @@ no <silent><leader>gb :Gblame<CR>
 no <silent><leader>gl :Glog<CR>
 no <silent><leader>gp :Git push<CR>
 no <silent><leader>xt :XtermColorTable<CR>
+
+" Miscellaneous Plugin Maps
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto Commands                                                              "
@@ -206,6 +236,13 @@ if has("autocmd")
   " Filetype settings (tabs, spaces, etc.)
   au FileType python,css,markdown setl et sts=4 ts=4 shiftwidth=4 tw=79
   au FileType ruby,javascript,html,xml setl et sts=2 ts=2 shiftwidth=2
+
+  " Enable omni completion.
+  au FileType css setl omnifunc=csscomplete#CompleteCSS
+  au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+  au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+  au FileType python setl omnifunc=pythoncomplete#Complete
+  au FileType xml setl omnifunc=xmlcomplete#CompleteTags
 
   " Improve Filetype detection
   au BufNewFile,BufRead *.md setf markdown
