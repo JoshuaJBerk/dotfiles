@@ -65,7 +65,7 @@ set bdir=$TMPDIR             " store backup in System TMP Directory
 set vdir=$TMPDIR             " store views in System TMP Directory
 set dir=$TMPDIR              " store swap in System TMP Directory
 set history=1000             " # of commands to keep
-set ut=2000                  " time to initiate swap/CursorHold AU
+set ut=4000                  " time to initiate swap/CursorHold AU
 set autoread autowrite       " continuous VIM file updates
 set hidden                   " hide buffers instead of closing them
 
@@ -83,8 +83,10 @@ Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch.git'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-eunuch'
@@ -102,11 +104,11 @@ Plugin 'mattn/gist-vim.git'
 Plugin 'edsono/vim-matchit'
 Plugin 'roman/golden-ratio.git'
 Plugin 'Keithbsmiley/investigate.vim'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'sjl/gundo.vim.git'
 Plugin 'mileszs/ack.vim.git'
 Plugin 'itchyny/lightline.vim'
+Plugin 'takac/vim-hardtime'
 call vundle#end()
 
 " Plugins
@@ -114,13 +116,14 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:investigate_use_dash = 1
+let g:hardtime_default_on = 1
 let g:sneak#streak = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions                                                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! InsertTabWrapper()
+function! s:InsertTabWrapper()
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
     return "\<TAB>"
@@ -129,13 +132,21 @@ function! InsertTabWrapper()
   endif
 endfunction
 
-function! SortFile()
-  normal! mzggvG
-  :sort ui
-  normal! v`z
+function! s:VSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  call histadd('/', substitute(@/, '[?/]', '\="\\%d".char2nr(submatch(0))', 'g'))
+  let @@ = temp
 endfunction
 
-function! ClearWhitespace()
+function! s:SortFile()
+  normal! ggvG
+  :sort ui
+  normal! v
+endfunction
+
+function! s:ClearWhitespace()
   normal mz
   silent! %s/\s\+$//
   let @/=""
@@ -155,7 +166,7 @@ no H ^
 no L g_
 
 " Tab For All The Things!
-ino <TAB> <C-R>=InsertTabWrapper()<CR>
+ino <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
 
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
@@ -183,10 +194,10 @@ nn <silent><leader>rc :so ~/.vimrc<CR>
 nn <silent><leader>fef :normal! gg=G``<CR>
 nn <silent><leader>sp :setl spell!<CR>
 nn <silent><leader>pp :setl paste!<CR>
-nn <silent><leader>sf :call SortFile()<CR>
-nn <silent><leader>W :call ClearWhitespace()<CR>
+nn <silent><leader>sf :<C-U>call <SID>SortFile()<CR>
+vn <silent><leader>/ :<C-U>call <SID>VSearch()<CR>/<CR>
+nn <silent><leader>W :<C-U>call <SID>ClearWhitespace()<CR>
 nn <silent><leader>it a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
-vn <silent><leader>/ y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 
 " Plugin Leader Key Maps
 no <leader>a :Ack<SPACE>
@@ -197,7 +208,9 @@ no <leader>mv :Move<SPACE>
 no <leader>rn :Rename<SPACE>
 no <leader>sw :SudoWrite<CR>
 no <leader>pu :PluginUpdate<CR>
+no <leader>pc :PluginClean!<CR>
 no <leader>k :call investigate#Investigate()<CR>
+no <silent><leader>ht :HardTimeToggle<CR>
 no <silent><leader>rt :RainbowParenthesesToggle<CR>
 no <silent><leader>st :SyntasticToggleMode<CR>
 no <silent><leader>nt :NERDTreeToggle<CR>
