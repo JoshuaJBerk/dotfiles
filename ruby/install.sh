@@ -11,6 +11,6 @@ then
 fi
 
 # Update System Gems
-gem update
+sudo gem update
 
 exit 0
