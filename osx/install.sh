@@ -39,6 +39,8 @@ brew install libyaml
 brew install heroku-toolbelt
 brew install postgresql
 brew install android-sdk
+brew install cowsay
+brew install fortune
 brew install reattach-to-user-namespace
 
 # GNU Duplicates

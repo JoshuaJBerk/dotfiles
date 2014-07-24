@@ -10,6 +10,10 @@ then
   alias la='gls -A --color'
 fi
 
+# Unix
+alias tlf="tail -f"
+alias ln='ln -v'
+
 # jump to recently used items
 if test $(which fasd)
 then
