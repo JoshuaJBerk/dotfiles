@@ -18,6 +18,8 @@ set shiftround               " use multiple of shiftwidth with '<' and '>'
 set formatoptions+=tcqj      " see ':help fo-table' for details
 set nojs                     " join lines w/one space only
 set encoding=utf-8           " UTF-8 encoding
+set nrformats-=octal         " assume hexadecimal numbering
+set fileformats+=mac         " auto-detect line endings"
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
 set list                     " display formatting characters
 set wrap                     " wrap lines
@@ -33,7 +35,7 @@ set gdefault                 " substitute all matches in line (not first)
 set showmatch mat=5          " quickly jump to matching bracket
 set cpt=.,w,b,u,t,i          " complete from buffers, files, and tags
 set cot=menu,longest         " disable preview window on completion
-set wig+=tmp/**              " wildmode: ignore tmp files
+set wig+=*/tmp/*,*.zip
 
 " View
 set nu rnu                   " add numbered lines (option: relativenumber)
@@ -82,6 +84,7 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch.git'
 Plugin 'tpope/vim-commentary'
@@ -96,27 +99,44 @@ Plugin 'majutsushi/tagbar.git'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Raimondi/delimitMate.git'
+Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'kien/rainbow_parentheses.vim.git'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'mattn/emmet-vim.git'
 Plugin 'mattn/webapi-vim.git'
 Plugin 'mattn/gist-vim.git'
+Plugin 'coderifous/textobj-word-column.vim'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'kana/vim-textobj-function'
+Plugin 'kana/vim-textobj-syntax'
+Plugin 'terryma/vim-expand-region'
 Plugin 'edsono/vim-matchit'
 Plugin 'roman/golden-ratio.git'
 Plugin 'Keithbsmiley/investigate.vim'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'sjl/gundo.vim.git'
+Plugin 'kshenoy/vim-signature'
+Plugin 'mhinz/vim-startify'
+Plugin 'mhinz/vim-signify'
 Plugin 'mileszs/ack.vim.git'
 Plugin 'itchyny/lightline.vim'
 Plugin 'takac/vim-hardtime'
 call vundle#end()
 
-" Plugins
+" Variables
+let NERDTreeHijackNetrw = 0
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
+let g:startify_change_to_vcs_root = 1
+let g:signify_vcs_list = [ 'git' ]
 let g:investigate_use_dash = 1
-let g:hardtime_default_on = 1
+let g:hardtime_default_on = 0
 let g:sneak#streak = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -185,6 +205,7 @@ let maplocalleader = "\\"
 " Leader Key Maps
 map <leader>y "*y
 nn <leader><leader> <C-^>
+vn <leader>s :sort<CR>
 vn <leader>r "ry:%s/<C-R>r/
 nn <silent><leader><SPACE> <Nop>
 nn <silent><leader>; <Nop>
@@ -209,6 +230,9 @@ no <leader>rn :Rename<SPACE>
 no <leader>sw :SudoWrite<CR>
 no <leader>pu :PluginUpdate<CR>
 no <leader>pc :PluginClean!<CR>
+no <leader>sl :SLoad<CR>
+no <leader>ss :SSave<CR>
+no <leader>sd :SDelete<CR>
 no <leader>k :call investigate#Investigate()<CR>
 no <silent><leader>ht :HardTimeToggle<CR>
 no <silent><leader>rt :RainbowParenthesesToggle<CR>
@@ -216,13 +240,14 @@ no <silent><leader>st :SyntasticToggleMode<CR>
 no <silent><leader>nt :NERDTreeToggle<CR>
 no <silent><leader>tt :TagbarToggle<CR>
 no <silent><leader>ut :GundoToggle<CR>
-no <silent><leader>gg :GitGutterToggle<CR>
 no <silent><leader>gs :Gstatus<CR>
 no <silent><leader>gd :Gdiff<CR>
 no <silent><leader>gc :Gcommit<CR>
 no <silent><leader>gb :Gblame<CR>
 no <silent><leader>gl :Glog<CR>
 no <silent><leader>gp :Git push<CR>
+no <silent><leader>gw :Gwrite<CR>
+no <silent><leader>gr :Gremove<CR>
 no <silent><leader>xt :XtermColorTable<CR>
 
 " Miscellaneous Plugin Maps
