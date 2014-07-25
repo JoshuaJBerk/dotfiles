@@ -99,7 +99,7 @@ Plugin 'godlygeek/tabular.git'
 Plugin 'majutsushi/tagbar.git'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Raimondi/delimitMate.git'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'kien/rainbow_parentheses.vim.git'
 Plugin 'kien/ctrlp.vim.git'
@@ -111,6 +111,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'kana/vim-textobj-indent'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-syntax'
+Plugin 'kana/vim-textobj-line'
 Plugin 'terryma/vim-expand-region'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'edsono/vim-matchit'
@@ -127,7 +128,7 @@ Plugin 'takac/vim-hardtime'
 call vundle#end()
 
 " Variables
-let NERDTreeHijackNetrw = 0
+let g:NERDTreeHijackNetrw = 0
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_style_error_symbol = '✠'
 let g:syntastic_warning_symbol = '∆'
