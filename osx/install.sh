@@ -34,9 +34,11 @@ brew install git-flow
 brew install cmake
 brew install ctags
 brew install p7zip
+brew install nmap
 brew install docker
 brew install libyaml
 brew install heroku-toolbelt
+brew install imagemagick
 brew install postgresql
 brew install android-sdk
 brew install cowsay

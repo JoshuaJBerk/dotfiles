@@ -20,11 +20,12 @@ set nojs                     " join lines w/one space only
 set encoding=utf-8           " UTF-8 encoding
 set nrformats-=octal         " assume hexadecimal numbering
 set fileformats+=mac         " auto-detect line endings"
+set nospell                  " spelling correction mode
+set spellfile=~/.vim/spell/en.utf-8.add
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
 set list                     " display formatting characters
 set wrap                     " wrap lines
 set showbreak=↪\             " indicator for wrapped lines
-set nospell                  " spelling correction mode
 
 " Search/Substitution/Completion
 set hlsearch                 " highlight search results
@@ -36,7 +37,6 @@ set showmatch mat=5          " quickly jump to matching bracket
 set cpt=.,w,b,u,t,i          " complete from buffers, files, and tags
 set cot=menu,longest         " disable preview window on completion
 set wig+=*/tmp/*,*.zip,*/.git/*
-"
 
 " View
 set nu rnu                   " add numbered lines (option: relativenumber)
@@ -129,6 +129,7 @@ call vundle#end()
 
 " Variables
 let g:NERDTreeHijackNetrw = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_style_error_symbol = '✠'
 let g:syntastic_warning_symbol = '∆'
@@ -208,7 +209,6 @@ vn > >gv
 
 " Set MapLeaders
 let mapleader=","
-let maplocalleader = "\\"
 
 " Leader Key Maps
 map <leader>y "*y
@@ -300,6 +300,12 @@ if has("autocmd")
   " Improve Filetype detection
   au BufNewFile,BufRead *.md setf markdown
   au BufNewFile,BufRead *.json setf javascript
+
+  " Markdown Syntax/Spelling
+  au FileType markdown setl syn=off spell
+
+  " Allow stylesheets to autocomplete hyphenated words
+  au FileType css,scss,sass setl iskeyword+=-
 
   " Always jump to the last known cursor position.
   au BufReadPost *
