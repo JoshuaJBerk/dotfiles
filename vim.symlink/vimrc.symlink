@@ -89,6 +89,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch.git'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
@@ -112,11 +113,13 @@ Plugin 'kana/vim-textobj-indent'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-syntax'
 Plugin 'kana/vim-textobj-line'
+Plugin 'kana/vim-textobj-entire'
 Plugin 'terryma/vim-expand-region'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'edsono/vim-matchit'
 Plugin 'roman/golden-ratio.git'
 Plugin 'Keithbsmiley/investigate.vim'
+Plugin 'chrisbra/Colorizer'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'sjl/gundo.vim.git'
 Plugin 'kshenoy/vim-signature'
@@ -137,6 +140,7 @@ let g:syntastic_style_warning_symbol = '≈'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
+let g:colorizer_auto_filetype='css,scss,sass'
 let g:investigate_use_dash = 1
 let g:hardtime_default_on = 0
 let g:sneak#streak = 1
@@ -200,6 +204,9 @@ ino <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
 
+" Insert a hash rocket with <c-l>
+im <c-l> <space>=><space>
+
 " Yank to EOL
 nn Y y$
 
@@ -254,6 +261,7 @@ no <leader>gw :Gwrite<CR>
 no <leader>gr :Gremove<CR>
 no <leader>k :call investigate#Investigate()<CR>
 no <silent><leader>ht :HardTimeToggle<CR>
+no <silent><leader>ct :ColorToggle<CR>
 no <silent><leader>rt :RainbowParenthesesToggle<CR>
 no <silent><leader>st :SyntasticToggleMode<CR>
 no <silent><leader>nt :NERDTreeToggle<CR>

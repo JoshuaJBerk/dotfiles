@@ -32,7 +32,7 @@ cask install fantastical 2> /dev/null
 cask install sublime-text3 2> /dev/null
 cask install arduino 2> /dev/null
 cask install fritzing 2> /dev/null
-cask install android-studio 2> /dev/null
+cask install android-studio-bundle 2> /dev/null
 
 # Fonts
 cask install font-inconsolata 2> /dev/null
