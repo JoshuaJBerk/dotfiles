@@ -294,6 +294,9 @@ if has("autocmd")
   au FileType python,css,markdown setl et sts=4 ts=4 sw=4 tw=79
   au FileType ruby,javascript,html,xml setl et sts=2 ts=2 sw=2
 
+  " Spelling
+  au FileType markdown setl spell
+
   " Folding
   au FileType python setl foldmethod=indent
   au FileType css setl foldmethod=marker foldmarker={,}
@@ -308,9 +311,6 @@ if has("autocmd")
   " Improve Filetype detection
   au BufNewFile,BufRead *.md setf markdown
   au BufNewFile,BufRead *.json setf javascript
-
-  " Markdown Syntax/Spelling
-  au FileType markdown setl syn=off spell
 
   " Allow stylesheets to autocomplete hyphenated words
   au FileType css,scss,sass setl iskeyword+=-

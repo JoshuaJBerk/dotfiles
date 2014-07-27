@@ -3,3 +3,6 @@ git/gitconfig.symlink
 
 ### MISC ###
 *hist
+
+### VIM ###
+~/.vim/bundle/
