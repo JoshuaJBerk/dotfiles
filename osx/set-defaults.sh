@@ -288,7 +288,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
 
 # Change minimize/maximize window effect
-defaults write com.apple.dock mineffect -string "genie"
+defaults write com.apple.dock mineffect -string "scale"
 
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true

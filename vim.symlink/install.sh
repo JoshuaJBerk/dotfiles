@@ -1,9 +1,9 @@
 #!/bin/sh
 # Vundle setup
 
-if [ ! -f $ZSH/vim.symlink/bundle/Vundle.vim/README.md ]; then
-  git clone https://github.com/gmarik/vundle ~/.vim/bundle/Vundle.vim
-  vim +PluginInstall +qall
+if [ ! -e $HOME/.vim/bundle/Vundle.vim  ]; then
+  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qa
 fi
 
 exit 0

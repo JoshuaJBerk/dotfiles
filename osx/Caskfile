@@ -1,43 +1,44 @@
+#!/bin/sh
 # Install native apps
-# Usage: `brew bundle ~/.dotfiles/osx/Caskfile`
 
 # Homebrew Cask
-install caskroom/cask/brew-cask
+brew install caskroom/cask/brew-cask
 
 # Programs
-cask install google-chrome 2> /dev/null
-cask install google-chrome-canary 2> /dev/null
-cask install firefox 2> /dev/null
-cask install firefox-nightly 2> /dev/null
-cask install webkit-nightly 2> /dev/null
-cask install iterm2 2> /dev/null
-cask install virtualbox 2> /dev/null
-cask install vlc 2> /dev/null
-cask install alfred 2> /dev/null
-cask install appzapper 2> /dev/null
-cask install cheatsheet 2> /dev/null
-cask install transmission 2> /dev/null
-cask install spotify 2> /dev/null
-cask install istat-menus 2> /dev/null
-cask install gpgtools 2> /dev/null
-cask install the-unarchiver 2> /dev/null
-cask install flux 2> /dev/null
-cask install google-drive 2> /dev/null
-cask install vagrant 2> /dev/null
-cask install dash 2> /dev/null
-cask install slack 2> /dev/null
-cask install cloud 2> /dev/null
-cask install livereload 2> /dev/null
-cask install fantastical 2> /dev/null
-cask install sublime-text3 2> /dev/null
-cask install arduino 2> /dev/null
-cask install fritzing 2> /dev/null
-cask install android-studio-bundle 2> /dev/null
+brew cask install google-chrome 2> /dev/null
+brew cask install google-chrome-canary 2> /dev/null
+brew cask install firefox 2> /dev/null
+brew cask install firefox-nightly 2> /dev/null
+brew cask install webkit-nightly 2> /dev/null
+brew cask install iterm2 2> /dev/null
+brew cask install virtualbox 2> /dev/null
+brew cask install vlc 2> /dev/null
+brew cask install alfred 2> /dev/null
+brew cask install appzapper 2> /dev/null
+brew cask install cheatsheet 2> /dev/null
+brew cask install transmission 2> /dev/null
+brew cask install spotify 2> /dev/null
+brew cask install istat-menus 2> /dev/null
+brew cask install gpgtools 2> /dev/null
+brew cask install the-unarchiver 2> /dev/null
+brew cask install flux 2> /dev/null
+brew cask install google-drive 2> /dev/null
+brew cask install vagrant 2> /dev/null
+brew cask install dash 2> /dev/null
+brew cask install slack 2> /dev/null
+brew cask install cloud 2> /dev/null
+brew cask install livereload 2> /dev/null
+brew cask install fantastical 2> /dev/null
+brew cask install sublime-text3 2> /dev/null
+brew cask install lighttable 2> /dev/null
+brew cask install arduino 2> /dev/null
+brew cask install fritzing 2> /dev/null
+brew cask install android-studio-bundle 2> /dev/null
 
 # Fonts
-cask install font-inconsolata 2> /dev/null
-cask install font-source-code-pro 2> /dev/null
+brew cask install font-inconsolata 2> /dev/null
+brew cask install font-source-code-pro 2> /dev/null
 
 # Wrap it up
-cask alfred link
-cask cleanup
+brew cask alfred link
+brew cask cleanup

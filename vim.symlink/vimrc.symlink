@@ -25,6 +25,7 @@ set spellfile=~/.vim/spell/en.utf-8.add
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
 set list                     " display formatting characters
 set wrap                     " wrap lines
+set cc=                      " colorcolumn = textwidth
 set showbreak=↪\             " indicator for wrapped lines
 
 " Search/Substitution/Completion
@@ -58,7 +59,7 @@ set foldmethod=syntax        " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
 set shm+=aI                  " avoid 'press Enter to continue'
 set t_Co=256                 " pretty colors everywhere whooo!!
-set spr sb                   " split windows open below/right
+set sb spr                   " split windows open below/right
 set cmdheight=1              " single line CLI
 
 " Backup
@@ -101,6 +102,7 @@ Plugin 'majutsushi/tagbar.git'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'Yggdroot/indentLine'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'kien/rainbow_parentheses.vim.git'
 Plugin 'kien/ctrlp.vim.git'
@@ -115,8 +117,10 @@ Plugin 'kana/vim-textobj-syntax'
 Plugin 'kana/vim-textobj-line'
 Plugin 'kana/vim-textobj-entire'
 Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'edsono/vim-matchit'
+Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'roman/golden-ratio.git'
 Plugin 'Keithbsmiley/investigate.vim'
 Plugin 'chrisbra/Colorizer'
@@ -141,6 +145,7 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:colorizer_auto_filetype='css,scss,sass'
+let g:indentLine_enabled = 0
 let g:investigate_use_dash = 1
 let g:hardtime_default_on = 0
 let g:sneak#streak = 1
@@ -187,9 +192,27 @@ function! s:ClearWhitespace()
   normal `z
 endfunction
 
+function! s:OpenChangedFiles() 
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
+  let filenames = split(status, "\n")
+  if len(filenames) > 0
+    exec "edit " . filenames[0]
+    for filename in filenames[1:]
+      exec "sp " . filename
+    endfor
+  end
+endfunction " (Thanks: Gary Bernhardt)
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings                                                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Arrow Keys
+nn <UP> <NOP>
+nn <DOWN> <NOP>
+nn <LEFT> :bp<CR>
+nn <RIGHT> :bn<CR>
 
 " Use Q for VIM CLI History
 no Q q:
@@ -201,11 +224,20 @@ no L g_
 " Tab For All The Things!
 ino <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
 
+" Expose current file in NerdTree w/Ctrl-\
+nn <silent> <C-\> :NERDTreeFind<CR>:vertical res 30<CR>
+
 " Redraw screen + remove search highlights
 nn <C-L> :nohl<CR><C-L>
 
-" Insert a hash rocket with <c-l>
-im <c-l> <space>=><space>
+" Insert-mode hash-rocket w/Ctrl-L (Thanks: Gary Bernhardt)
+im <C-l> <space>=><space>
+
+" Move beyond auto-pairs w/Ctrl-A
+im <C-a> <esc>wa
+
+" Easier CursorMarks (RSI Reduction)
+nn ' `
 
 " Yank to EOL
 nn Y y$
@@ -222,19 +254,22 @@ map <leader>y "*y
 nn <leader><leader> <C-^>
 vn <leader>s :sort<CR>
 vn <leader>r "ry:%s/<C-R>r/
+vm <leader>tidy :!tidy -q -i --show-errors 0<CR>
 nn <silent><leader><SPACE> <Nop>
 nn <silent><leader>; <Nop>
 nn <silent><leader>ul :t.<CR>Vr=
 nn <silent><leader>cd :lcd %:p:h<CR>
+nn <silent><leader>cf :let @* = expand("%:~")<CR>
 nn <silent><leader>rc :so ~/.vimrc<CR>
 nn <silent><leader>fef :normal! gg=G``<CR>
 nn <silent><leader>sp :setl spell!<CR>
 nn <silent><leader>pp :setl paste!<CR>
 nn <silent><leader>ll :setl list!<CR>
+nn <silent><leader>ocf :<C-U>call <SID>OpenChangedFiles()<CR>
 nn <silent><leader>sf :<C-U>call <SID>SortFile()<CR>
 vn <silent><leader>/ :<C-U>call <SID>VSearch()<CR>/<CR>
 nn <silent><leader>W :<C-U>call <SID>ClearWhitespace()<CR>
-nn <silent><leader>it a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
+nn <silent><leader>time a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
 nn <silent><leader>fw :exe "vimgrep ".expand("<cword>")." %"<CR>:copen<CR>
 nn <silent><leader>ff :exe 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
@@ -262,6 +297,7 @@ no <leader>gr :Gremove<CR>
 no <leader>k :call investigate#Investigate()<CR>
 no <silent><leader>ht :HardTimeToggle<CR>
 no <silent><leader>ct :ColorToggle<CR>
+no <silent><leader>it :IndentLinesToggle<CR>
 no <silent><leader>rt :RainbowParenthesesToggle<CR>
 no <silent><leader>st :SyntasticToggleMode<CR>
 no <silent><leader>nt :NERDTreeToggle<CR>
