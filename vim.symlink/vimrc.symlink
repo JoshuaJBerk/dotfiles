@@ -25,7 +25,6 @@ set spellfile=~/.vim/spell/en.utf-8.add
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
 set list                     " display formatting characters
 set wrap                     " wrap lines
-set cc=                      " colorcolumn = textwidth
 set showbreak=↪\             " indicator for wrapped lines
 
 " Search/Substitution/Completion
@@ -55,7 +54,7 @@ set showcmd                  " display incomplete commands
 set title                    " filename in the window bar
 set mouse=a                  " enable mouse support in the console
 set mousehide                " hide pointer during typing, until moved
-set foldmethod=syntax        " collapsible code segments
+set fen foldmethod=syntax    " collapsible code segments
 set bs=indent,eol,start      " allow backspacing in insert mode
 set shm+=aI                  " avoid 'press Enter to continue'
 set t_Co=256                 " pretty colors everywhere whooo!!
@@ -170,18 +169,18 @@ function! s:InsertTabWrapper()
   endif
 endfunction
 
-function! s:VSearch()
-  let temp = @@
-  norm! gvy
-  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-  call histadd('/', substitute(@/, '[?/]', '\="\\%d".char2nr(submatch(0))', 'g'))
-  let @@ = temp
-endfunction
-
 function! s:SortFile()
   normal! ggvG
   :sort ui
   normal! v
+endfunction
+
+function! s:ToggleColorColumn()
+  if &colorcolumn != ''
+    setl colorcolumn&
+  else
+    setl colorcolumn=+1
+  endif
 endfunction
 
 function! s:ClearWhitespace()
@@ -265,9 +264,9 @@ nn <silent><leader>fef :normal! gg=G``<CR>
 nn <silent><leader>sp :setl spell!<CR>
 nn <silent><leader>pp :setl paste!<CR>
 nn <silent><leader>ll :setl list!<CR>
+nn <silent><leader>cc :<C-U>call <SID>ToggleColorColumn()<CR>
 nn <silent><leader>ocf :<C-U>call <SID>OpenChangedFiles()<CR>
 nn <silent><leader>sf :<C-U>call <SID>SortFile()<CR>
-vn <silent><leader>/ :<C-U>call <SID>VSearch()<CR>/<CR>
 nn <silent><leader>W :<C-U>call <SID>ClearWhitespace()<CR>
 nn <silent><leader>time a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
 nn <silent><leader>fw :exe "vimgrep ".expand("<cword>")." %"<CR>:copen<CR>
@@ -343,6 +342,8 @@ if has("autocmd")
   au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
+  au FileType ruby setl omnifunc=rubycomplete#Complete
+  au FileType haskell setl omnifunc=necoghc#omnifunc
 
   " Improve Filetype detection
   au BufNewFile,BufRead *.md setf markdown

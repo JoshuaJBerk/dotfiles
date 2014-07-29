@@ -13,6 +13,8 @@ fi
 # Unix
 alias tlf="tail -f"
 alias ln='ln -v'
+alias h='history'
+alias mkdir='mkdir -p'
 
 # jump to recently used items
 if test $(which fasd)

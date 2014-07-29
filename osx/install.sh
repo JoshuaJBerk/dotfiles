@@ -29,7 +29,7 @@ brew install tree
 brew install zsh
 brew install fasd
 brew install hub
-brew install ghi
+brew install ghi          # Github Issues via CLI!
 brew install git-flow
 brew install cmake
 brew install ctags

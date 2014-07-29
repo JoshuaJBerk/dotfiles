@@ -345,7 +345,7 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 defaults write com.apple.dock wvous-tr-corner -int 12
 defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom left screen corner → Launchpad
-defaults write com.apple.dock wvous-bl-corner -int 11
+defaults write com.apple.dock wvous-bl-corner -int 3
 defaults write com.apple.dock wvous-bl-modifier -int 0
 # Bottom right screen corner → Desktop
 defaults write com.apple.dock wvous-br-corner -int 4
@@ -458,7 +458,6 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # Menu bar: hide Default System Icons
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
     defaults write "${domain}" dontAutoLoad -array \
-        "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
         "/System/Library/CoreServices/Menu Extras/Volume.menu" \
         "/System/Library/CoreServices/Menu Extras/User.menu" \
         "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
@@ -497,9 +496,6 @@ osascript -e 'tell application "System Events" to make new login item at end of 
 
 # Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
 ln -sf /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
-
-# PostgreSQL via Launchctl at Startup
-ln -sf /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 
 fi
 
