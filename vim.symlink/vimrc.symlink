@@ -20,6 +20,7 @@ set nojs                     " join lines w/one space only
 set encoding=utf-8           " UTF-8 encoding
 set nrformats-=octal         " assume hexadecimal numbering
 set fileformats+=mac         " auto-detect line endings"
+set nrformats-=octal         " avoid octal notation
 set nospell                  " spelling correction mode
 set spellfile=~/.vim/spell/en.utf-8.add
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:¤,eol:¬
@@ -90,6 +91,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch.git'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-jdaddy'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
@@ -115,6 +117,7 @@ Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-syntax'
 Plugin 'kana/vim-textobj-line'
 Plugin 'kana/vim-textobj-entire'
+Plugin 'PeterRincker/vim-argumentative'
 Plugin 'terryma/vim-expand-region'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'chrisbra/NrrwRgn'
@@ -167,7 +170,7 @@ function! s:InsertTabWrapper()
   else
     return "\<C-p>"
   endif
-endfunction
+endfunction " (Thanks Mislav)
 
 function! s:SortFile()
   normal! ggvG
@@ -191,6 +194,14 @@ function! s:ClearWhitespace()
   normal `z
 endfunction
 
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\_s\+', '\\_s\\+', 'g')
+  call histadd('/', substitute(@/, '[?/]', '\="\\%d".char2nr(submatch(0))', 'g'))
+  let @@ = temp
+endfunction " (Thanks Godlygeek/Nelstrom)
+
 function! s:OpenChangedFiles() 
   only " Close all windows, unless they're modified
   let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
@@ -213,33 +224,34 @@ nn <DOWN> <NOP>
 nn <LEFT> :bp<CR>
 nn <RIGHT> :bn<CR>
 
-" Use Q for VIM CLI History
-no Q q:
-
-" Line Navigation
-no H ^
-no L g_
-
-" Tab For All The Things!
-ino <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
-
-" Expose current file in NerdTree w/Ctrl-\
-nn <silent> <C-\> :NERDTreeFind<CR>:vertical res 30<CR>
-
-" Redraw screen + remove search highlights
-nn <C-L> :nohl<CR><C-L>
-
-" Insert-mode hash-rocket w/Ctrl-L (Thanks: Gary Bernhardt)
-im <C-l> <space>=><space>
-
-" Move beyond auto-pairs w/Ctrl-A
-im <C-a> <esc>wa
-
 " Easier CursorMarks (RSI Reduction)
 nn ' `
 
 " Yank to EOL
 nn Y y$
+
+" Redraw screen + remove search highlights
+nn <C-L> :nohl<CR><C-L>
+
+" Use Q for VIM CLI History
+nn Q q:
+
+" Line Navigation
+nn H ^
+nn L g_
+
+" Tab For All The Things!
+ino <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
+
+" Insert-mode hash-rocket w/Ctrl-L (Thanks: Gary Bernhardt)
+ino <C-L> <SPACE>=><SPACE>
+
+" Move beyond auto-pairs w/Ctrl-A
+im <C-A> <ESC>wa
+
+" Visual Star (*) Search
+vn * :<C-U>call <SID>VSetSearch()<CR>/<CR>
+vn # :<C-U>call <SID>VSetSearch()<CR>?<CR>
 
 " Reselect Visual Block after Indent/Outdent
 vn < <gv
@@ -268,9 +280,11 @@ nn <silent><leader>cc :<C-U>call <SID>ToggleColorColumn()<CR>
 nn <silent><leader>ocf :<C-U>call <SID>OpenChangedFiles()<CR>
 nn <silent><leader>sf :<C-U>call <SID>SortFile()<CR>
 nn <silent><leader>W :<C-U>call <SID>ClearWhitespace()<CR>
+nn <silent><leader>gf :vertical botright wincmd F<CR>
 nn <silent><leader>time a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
 nn <silent><leader>fw :exe "vimgrep ".expand("<cword>")." %"<CR>:copen<CR>
 nn <silent><leader>ff :exe 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nn <silent><leader>/ :NERDTreeFind<CR>:vertical res 30<CR>
 
 " Plugin Leader Key Maps
 no <leader>a :Ack<SPACE>
