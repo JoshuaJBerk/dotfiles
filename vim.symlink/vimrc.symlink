@@ -37,6 +37,7 @@ set gdefault                 " substitute all matches in line (not first)
 set showmatch mat=5          " quickly jump to matching bracket
 set cpt=.,w,b,u,t,i          " complete from buffers, files, and tags
 set cot=menu,longest         " disable preview window on completion
+set wildmode=longest,list    " CLI autocomplete suggestions w/<TAB>
 set wig+=*/tmp/*,*.zip,*/.git/*
 
 " View
@@ -97,6 +98,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-eunuch'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'justinmk/vim-sneak.git'
 Plugin 'godlygeek/tabular.git'
 Plugin 'majutsushi/tagbar.git'
@@ -157,7 +159,7 @@ let g:startify_custom_header =
       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['']
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir',
-                          \ 'rtscript', 'line', 'changes', 'mixed']
+      \ 'rtscript', 'line', 'changes', 'mixed']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions                                                                  "
@@ -246,8 +248,9 @@ ino <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
 " Insert-mode hash-rocket w/Ctrl-L (Thanks: Gary Bernhardt)
 ino <C-L> <SPACE>=><SPACE>
 
-" Move beyond auto-pairs w/Ctrl-A
-im <C-A> <ESC>wa
+" Readline Style Insertion
+ino <C-B> <Left>
+ino <C-F> <Right>
 
 " Visual Star (*) Search
 vn * :<C-U>call <SID>VSetSearch()<CR>/<CR>
@@ -257,8 +260,8 @@ vn # :<C-U>call <SID>VSetSearch()<CR>?<CR>
 vn < <gv
 vn > >gv
 
-" Set MapLeaders
-let mapleader=","
+" Set MapLeader as <SPACE>
+let mapleader=" "
 
 " Leader Key Maps
 map <leader>y "*y
@@ -266,8 +269,6 @@ nn <leader><leader> <C-^>
 vn <leader>s :sort<CR>
 vn <leader>r "ry:%s/<C-R>r/
 vm <leader>tidy :!tidy -q -i --show-errors 0<CR>
-nn <silent><leader><SPACE> <Nop>
-nn <silent><leader>; <Nop>
 nn <silent><leader>ul :t.<CR>Vr=
 nn <silent><leader>cd :lcd %:p:h<CR>
 nn <silent><leader>cf :let @* = expand("%:~")<CR>
@@ -334,43 +335,43 @@ if has("autocmd")
   syntax on
 
   augroup vimrcEx
-  au!
+    au!
 
-  " Exit 'Insert Mode' after UpdateTime
-  au CursorHoldI * stopinsert
+    " Exit 'Insert Mode' after UpdateTime
+    au CursorHoldI * stopinsert
 
-  " Formatting
-  au FileType python,css,markdown setl et sts=4 ts=4 sw=4 tw=79
-  au FileType ruby,javascript,html,xml setl et sts=2 ts=2 sw=2
+    " Formatting
+    au FileType python,css,markdown setl et sts=4 ts=4 sw=4 tw=79
+    au FileType ruby,javascript,html,xml setl et sts=2 ts=2 sw=2
 
-  " Spelling
-  au FileType markdown setl spell
+    " Spelling
+    au FileType markdown setl spell
 
-  " Folding
-  au FileType python setl foldmethod=indent
-  au FileType css setl foldmethod=marker foldmarker={,}
+    " Folding
+    au FileType python setl foldmethod=indent
+    au FileType css setl foldmethod=marker foldmarker={,}
 
-  " Enable omni completion.
-  au FileType css setl omnifunc=csscomplete#CompleteCSS
-  au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-  au FileType python setl omnifunc=pythoncomplete#Complete
-  au FileType xml setl omnifunc=xmlcomplete#CompleteTags
-  au FileType ruby setl omnifunc=rubycomplete#Complete
-  au FileType haskell setl omnifunc=necoghc#omnifunc
+    " Enable omni completion.
+    au FileType css setl omnifunc=csscomplete#CompleteCSS
+    au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+    au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+    au FileType python setl omnifunc=pythoncomplete#Complete
+    au FileType xml setl omnifunc=xmlcomplete#CompleteTags
+    au FileType ruby setl omnifunc=rubycomplete#Complete
+    au FileType haskell setl omnifunc=necoghc#omnifunc
 
-  " Improve Filetype detection
-  au BufNewFile,BufRead *.md setf markdown
-  au BufNewFile,BufRead *.json setf javascript
+    " Improve Filetype detection
+    au BufNewFile,BufRead *.md setf markdown
+    au BufNewFile,BufRead *.json setf javascript
 
-  " Allow stylesheets to autocomplete hyphenated words
-  au FileType css,scss,sass setl iskeyword+=-
+    " Allow stylesheets to autocomplete hyphenated words
+    au FileType css,scss,sass setl iskeyword+=-
 
-  " Always jump to the last known cursor position.
-  au BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+    " Always jump to the last known cursor position.
+    au BufReadPost *
+          \ if line("'\"") > 1 && line("'\"") <= line("$") |
+          \   exe "normal! g`\"" |
+          \ endif
 
   augroup END
 

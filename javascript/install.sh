@@ -10,6 +10,7 @@ if test $(which npm)
 then
   npm -g update
   npm install -g yo
+  npm install -g d3
   npm install -g bower
   npm install -g gulp
   npm install -g cordova
