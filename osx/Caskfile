@@ -10,6 +10,7 @@ brew cask install google-chrome-canary 2> /dev/null
 brew cask install firefox 2> /dev/null
 brew cask install firefox-nightly 2> /dev/null
 brew cask install webkit-nightly 2> /dev/null
+brew cask install torbrowser 2> /dev/null
 brew cask install iterm2 2> /dev/null
 brew cask install virtualbox 2> /dev/null
 brew cask install vlc 2> /dev/null
@@ -28,7 +29,6 @@ brew cask install dash 2> /dev/null
 brew cask install slack 2> /dev/null
 brew cask install cloud 2> /dev/null
 brew cask install livereload 2> /dev/null
-brew cask install fantastical 2> /dev/null
 brew cask install sublime-text3 2> /dev/null
 brew cask install lighttable 2> /dev/null
 brew cask install arduino 2> /dev/null

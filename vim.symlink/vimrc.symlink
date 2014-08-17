@@ -99,6 +99,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-eunuch'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'jamessan/vim-gnupg'
 Plugin 'justinmk/vim-sneak.git'
 Plugin 'godlygeek/tabular.git'
 Plugin 'majutsushi/tagbar.git'
@@ -147,6 +148,8 @@ let g:syntastic_warning_symbol = '∆'
 let g:syntastic_style_warning_symbol = '≈'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_camel_case = 1
+let g:neocomplete#enable_smart_case = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:colorizer_auto_filetype='css,scss,sass'
 let g:indentLine_enabled = 0
@@ -204,7 +207,7 @@ function! s:VSetSearch()
   let @@ = temp
 endfunction " (Thanks Godlygeek/Nelstrom)
 
-function! s:OpenChangedFiles() 
+function! s:OpenChangedFiles()
   only " Close all windows, unless they're modified
   let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
   let filenames = split(status, "\n")
@@ -280,7 +283,7 @@ nn <silent><leader>ll :setl list!<CR>
 nn <silent><leader>cc :<C-U>call <SID>ToggleColorColumn()<CR>
 nn <silent><leader>ocf :<C-U>call <SID>OpenChangedFiles()<CR>
 nn <silent><leader>sf :<C-U>call <SID>SortFile()<CR>
-nn <silent><leader>W :<C-U>call <SID>ClearWhitespace()<CR>
+nn <silent><leader>ww :<C-U>call <SID>ClearWhitespace()<CR>
 nn <silent><leader>gf :vertical botright wincmd F<CR>
 nn <silent><leader>time a<C-R>=strftime('%F %H:%M:%S.0 %z')<CR>
 nn <silent><leader>fw :exe "vimgrep ".expand("<cword>")." %"<CR>:copen<CR>
