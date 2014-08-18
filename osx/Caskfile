@@ -14,6 +14,7 @@ brew cask install torbrowser 2> /dev/null
 brew cask install iterm2 2> /dev/null
 brew cask install virtualbox 2> /dev/null
 brew cask install vlc 2> /dev/null
+brew cask install gimp 2> /dev/null
 brew cask install alfred 2> /dev/null
 brew cask install appzapper 2> /dev/null
 brew cask install cheatsheet 2> /dev/null
