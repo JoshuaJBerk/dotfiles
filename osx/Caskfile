@@ -35,6 +35,7 @@ brew cask install lighttable 2> /dev/null
 brew cask install arduino 2> /dev/null
 brew cask install fritzing 2> /dev/null
 brew cask install android-studio-bundle 2> /dev/null
+brew cask install sophos-anti-virus-home-edition 2> /dev/null
 
 # Fonts
 brew cask install font-inconsolata 2> /dev/null
