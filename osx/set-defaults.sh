@@ -466,7 +466,7 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 done
 
 # Menu bar: Insert iStat Menu Modules
-defaults write com.apple.systemuiserver menuExtras -array "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusCPU.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusMemory.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusDrives.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusNetwork.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusTemps.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusBattery.menu" "/Library/Application\ Support/iStat\ Menus\ 4/extras/iStatMenusDateAndTimes.menu"
+defaults write com.apple.systemuiserver menuExtras -array "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusCPU.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusMemory.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusDrives.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusNetwork.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusTemps.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusBattery.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusDateAndTimes.menu"
 
 # Wipe all (default) app icons from the Dock
 defaults write com.apple.dock persistent-apps -array ""

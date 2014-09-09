@@ -28,6 +28,7 @@ brew cask install google-drive 2> /dev/null
 brew cask install vagrant 2> /dev/null
 brew cask install dash 2> /dev/null
 brew cask install slack 2> /dev/null
+brew cask install skype 2> /dev/null
 brew cask install cloud 2> /dev/null
 brew cask install livereload 2> /dev/null
 brew cask install sublime-text3 2> /dev/null

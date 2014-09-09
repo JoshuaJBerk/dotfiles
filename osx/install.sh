@@ -24,6 +24,7 @@ brew install ack
 brew install grc
 brew install git
 brew install hg
+brew install go
 brew install wget
 brew install tree
 brew install zsh
@@ -37,6 +38,7 @@ brew install p7zip
 brew install nmap
 brew install docker
 brew install libyaml
+brew install readline
 brew install heroku-toolbelt
 brew install imagemagick
 brew install postgresql
@@ -60,6 +62,7 @@ brew install grep --default-names
 brew install vim --with-lua --override-system-vi
 
 # Remove temporary install files + fix links
+brew linkapps
 brew cleanup
 brew tap --repair 
 
