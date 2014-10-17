@@ -9,5 +9,6 @@ fi
 
 # Packages
 pip3 install pylint --upgrade
+pip3 install twitter --upgrade
 
 exit 0
