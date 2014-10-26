@@ -154,6 +154,25 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
 # Stop iTunes from responding to the keyboard media keys
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
+# Map Caps Lock Modifier Key to Control
+/usr/bin/osascript > /dev/null << EOT
+tell application "System Preferences"
+    reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
+end tell
+tell application "System Events" to tell window 1 of process "System Preferences"
+    click button 1 of tab group 1
+    tell sheet 1
+        tell pop up button 4
+            click
+            delay 0.1
+                click menu item 2 of menu 1
+        end tell
+        click button "OK"
+    end tell
+end tell
+quit application "System Preferences"
+EOT
+
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
@@ -229,18 +248,7 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-
-# Alter What Shows in the Sidebar
-/usr/libexec/PlistBuddy -c "Delete :favorites:ShowRemovable" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Add :favorites:ShowRemovable bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Delete :favorites:ShowHardDisks" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Add :favorites:ShowHardDisks bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Delete :favorites:ShowEjectables" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Add :favorites:ShowEjectables bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Delete :favorites:ShowServers" ~/Library/Preferences/com.apple.sidebarlists.plist
-/usr/libexec/PlistBuddy -c "Add :favorites:ShowServers bool true" ~/Library/Preferences/com.apple.sidebarlists.plist
 
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
@@ -418,7 +426,7 @@ if [ -f /usr/local/bin/zsh ]; then
     fi
   else
     # Add Homebrew ZSH to System Options
-    echo /usr/local/bin/zsh >> /etc/shells
+    echo /usr/local/bin/zsh | sudo tee -a /etc/shells
     # Change to Homebrew zsh
     chsh -s /usr/local/bin/zsh
   fi
@@ -456,7 +464,7 @@ sudo scutil --set LocalHostName "JJB-AIR"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "JJB-AIR"
 
 # Menu bar: hide Default System Icons
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+for domain in ~/Library/Preferences/com.apple.systemuiserver.*; do
     defaults write "${domain}" dontAutoLoad -array \
         "/System/Library/CoreServices/Menu Extras/Volume.menu" \
         "/System/Library/CoreServices/Menu Extras/User.menu" \

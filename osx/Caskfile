@@ -4,6 +4,9 @@
 # Homebrew Cask
 brew install caskroom/cask/brew-cask
 
+# Symlink to Main Applications Directory
+export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+
 # Programs
 brew cask install google-chrome 2> /dev/null
 brew cask install google-chrome-canary 2> /dev/null
@@ -30,10 +33,7 @@ brew cask install vagrant 2> /dev/null
 brew cask install dash 2> /dev/null
 brew cask install slack 2> /dev/null
 brew cask install skype 2> /dev/null
-brew cask install cloud 2> /dev/null
-brew cask install livereload 2> /dev/null
 brew cask install sublime-text3 2> /dev/null
-brew cask install lighttable 2> /dev/null
 brew cask install arduino 2> /dev/null
 brew cask install fritzing 2> /dev/null
 brew cask install android-studio-bundle 2> /dev/null
