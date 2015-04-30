@@ -37,6 +37,7 @@ brew cask install sublime-text3 2> /dev/null
 brew cask install arduino 2> /dev/null
 brew cask install fritzing 2> /dev/null
 brew cask install android-studio-bundle 2> /dev/null
+brew cask install monotype-skyfonts 2> /dev/null
 brew cask install sophos-anti-virus-home-edition 2> /dev/null
 
 # Fonts
