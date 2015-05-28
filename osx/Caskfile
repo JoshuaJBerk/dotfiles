@@ -21,7 +21,6 @@ brew cask install alfred 2> /dev/null
 brew cask install appzapper 2> /dev/null
 brew cask install cheatsheet 2> /dev/null
 brew cask install transmission 2> /dev/null
-brew cask install spotify 2> /dev/null
 brew cask install istat-menus 2> /dev/null
 brew cask install gpgtools 2> /dev/null
 brew cask install the-unarchiver 2> /dev/null
@@ -31,12 +30,8 @@ brew cask install balsamiq-mockups 2> /dev/null
 brew cask install sketch 2> /dev/null
 brew cask install vagrant 2> /dev/null
 brew cask install dash 2> /dev/null
-brew cask install slack 2> /dev/null
 brew cask install skype 2> /dev/null
 brew cask install sublime-text3 2> /dev/null
-brew cask install arduino 2> /dev/null
-brew cask install fritzing 2> /dev/null
-brew cask install android-studio-bundle 2> /dev/null
 brew cask install monotype-skyfonts 2> /dev/null
 brew cask install sophos-anti-virus-home-edition 2> /dev/null
 
