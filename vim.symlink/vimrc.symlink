@@ -386,9 +386,9 @@ endif
 
 " Change Background by Time of Day
 let iTermProfile = $ITERM_PROFILE
-if iTermProfile == "Day"
+if iTermProfile == "Light"
   set background=light
-elseif iTermProfile == "Night"
+elseif iTermProfile == "Dark"
   set background=dark
 endif
 
