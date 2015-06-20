@@ -385,10 +385,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Change Background by Time of Day
-let hour = strftime("%H")
-if hour >= 7 && hour <= 19
+let iTermProfile = $ITERM_PROFILE
+if iTermProfile == "Day"
   set background=light
-else
+elseif iTermProfile == "Night"
   set background=dark
 endif
 
