@@ -40,5 +40,4 @@ brew cask install font-inconsolata 2> /dev/null
 brew cask install font-source-code-pro 2> /dev/null
 
 # Wrap it up
-brew cask alfred link
 brew cask cleanup

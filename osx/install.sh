@@ -42,7 +42,6 @@ brew install readline
 brew install heroku-toolbelt
 brew install imagemagick
 brew install postgresql
-brew install android-sdk
 brew install cowsay
 brew install fortune
 brew install reattach-to-user-namespace
