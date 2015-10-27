@@ -27,13 +27,14 @@ brew cask install sketch-toolbox 2> /dev/null
 brew cask install vagrant 2> /dev/null
 brew cask install dash 2> /dev/null
 brew cask install sublime-text3 2> /dev/null
-brew cask install atom-mac 2> /dev/null
-brew cask install monotype-skyfonts 2> /dev/null
+brew cask install atom 2> /dev/null
+brew cask install licecap 2> /dev/null
 brew cask install sophos-anti-virus-home-edition 2> /dev/null
 
 # Fonts
 brew cask install font-inconsolata 2> /dev/null
 brew cask install font-source-code-pro 2> /dev/null
+brew cask install font-roboto 2> /dev/null
 
 # Wrap it up
 brew cask cleanup
