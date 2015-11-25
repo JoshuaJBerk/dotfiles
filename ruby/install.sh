@@ -13,4 +13,7 @@ fi
 # Update System Gems
 sudo gem update
 
+# Install Gems
+sudo gem install -n /usr/local/bin cocoapods
+
 exit 0
