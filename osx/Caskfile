@@ -27,7 +27,6 @@ brew cask install vagrant 2> /dev/null
 brew cask install dash 2> /dev/null
 brew cask install sublime-text3 2> /dev/null
 brew cask install atom 2> /dev/null
-brew cask install sophos-anti-virus-home-edition 2> /dev/null
 
 # Fonts
 brew cask install font-inconsolata 2> /dev/null
