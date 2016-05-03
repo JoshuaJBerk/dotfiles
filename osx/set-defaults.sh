@@ -487,18 +487,13 @@ defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/App Store.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Dash.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Sublime Text.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 # Start Applications at login
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Alfred 2.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/CheatSheet.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Drive.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/iTerm.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Flux.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome Canary.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/LiveReload.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Transmit.app/Contents/MacOS/TransmitMenu.app", hidden:true }' > /dev/null 2>&1
 
 # Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
 ln -sf /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
