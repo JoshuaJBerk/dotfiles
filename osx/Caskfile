@@ -23,7 +23,6 @@ brew cask install flux 2> /dev/null
 brew cask install google-drive 2> /dev/null
 brew cask install sketch 2> /dev/null
 brew cask install sketch-toolbox 2> /dev/null
-brew cask install vagrant 2> /dev/null
 brew cask install dash 2> /dev/null
 brew cask install sublime-text3 2> /dev/null
 brew cask install atom 2> /dev/null
