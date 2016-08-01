@@ -47,7 +47,6 @@ set ttyfast                  " improves redrawing
 set lazyredraw               " don't redraw during macros/etc.
 set nosol                    " keep the scrolling cursor position
 set ruler                    " display cursor position all the time
-set cul                      " cursorline highlighting
 set virtualedit=block        " allow cursor everywhere in V-Block mode
 set laststatus=2             " always display status bar
 set report=0                 " display all file changes
@@ -406,6 +405,10 @@ endif
 
 " Color Scheme
 colo Solarized
+
+hi clear SignColumn
+hi clear LineNr
+hi clear Cursorlinenr
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End of Settings                                                            "
