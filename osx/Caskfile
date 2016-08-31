@@ -16,7 +16,7 @@ brew cask install istat-menus 2> /dev/null
 brew cask install flux 2> /dev/null
 brew cask install google-drive 2> /dev/null
 brew cask install sketch 2> /dev/null
-brew cask install sublime-text 2> /dev/null
+brew cask install atom 2> /dev/null
 
 # Fonts
 brew cask install font-inconsolata 2> /dev/null
