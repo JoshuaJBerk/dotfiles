@@ -28,9 +28,7 @@ apm install atom-html-preview
 
 # Miscellaneous
 apm install file-icons
-apm install minimap
 apm install atom-beautify
 apm install highlight-selected
-apm install vim-mode
 apm install w3c-validation 
 apm install open-recent
