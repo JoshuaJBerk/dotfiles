@@ -436,17 +436,16 @@ defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault
 if [ $USER = "joshuaberk" ]; then
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "JJB-AIR"
-sudo scutil --set HostName "JJB-AIR"
-sudo scutil --set LocalHostName "JJB-AIR"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "JJB-AIR"
+sudo scutil --set ComputerName "JJB-PRO"
+sudo scutil --set HostName "JJB-PRO"
+sudo scutil --set LocalHostName "JJB-PRO"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "JJB-PRO"
 
 # Menu bar: hide Default System Icons
 for domain in ~/Library/Preferences/com.apple.systemuiserver.*; do
     defaults write "${domain}" dontAutoLoad -array \
         "/System/Library/CoreServices/Menu Extras/Volume.menu" \
         "/System/Library/CoreServices/Menu Extras/User.menu" \
-        "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
         "/System/Library/CoreServices/Menu Extras/Battery.menu" \
         "/System/Library/CoreServices/Menu Extras/Clock.menu"
 done
@@ -466,13 +465,8 @@ defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
 # Start Applications at login
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Alfred 2.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Drive.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Flux.app", hidden:true }' > /dev/null 2>&1
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome Canary.app", hidden:true }' > /dev/null 2>&1
-
-# Add the 'subl' command (via Symbolic Link) in Bash @ /usr/local/bin
-ln -sf /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 fi
 
