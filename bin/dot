@@ -12,6 +12,6 @@ $ZSH/script/install
 
 if [ "$(uname -s)" == "Darwin" ]; then
   softwareupdate --install --all 2>&1
-  $ZSH/osx/set-defaults.sh 2>&1
   $ZSH/osx/Caskfile
+  $ZSH/osx/set-defaults.sh 2>&1
 fi
