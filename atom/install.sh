@@ -4,7 +4,7 @@
 
 # Check for Atom Installation
 if test ! $(which atom)
-then brew install atom
+then brew install Caskroom/cask/atom
 fi
 
 # Git
