@@ -89,12 +89,12 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 ###############################################################################
 
 # Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+# defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Trackpad: enable secondary click for this user
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+# defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
 # Gestures
 defaults write com.apple.dock showDesktopGestureEnabled -int 1
@@ -111,8 +111,8 @@ defaults write -g AppleEnableSwipeNavigateWithScrolls -int 1
 defaults -currentHost write -g com.apple.trackpad.threeFingerHorizSwipeGesture -int 2
 
 # Set max trackpad scaling speed
-defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
-defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
+# defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
+# defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
 
 # Enable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
@@ -125,9 +125,6 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 
 # Eliminate Keyboard Delay Until Repeat
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
-
-# Increase sound quality for Bluetooth headphones/headsets
-#defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
@@ -173,9 +170,6 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
-# Enable HiDPI display modes (requires restart)
-# sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder                                                                      #
