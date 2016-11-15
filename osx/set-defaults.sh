@@ -257,7 +257,7 @@ defaults write com.apple.finder 'FXPreferredGroupBy' -string 'Kind'
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Empty Trash securely by default
-# defaults write com.apple.finder EmptyTrashSecurely -bool true
+defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # Show the ~/Library folder.
 chflags nohidden ~/Library
@@ -295,7 +295,7 @@ defaults write com.apple.dock launchanim -bool true
 defaults write com.apple.dock autohide -bool true
 
 # Speed up Mission Control animations
-# defaults write com.apple.dock expose-animation-duration -float 0.3
+defaults write com.apple.dock expose-animation-duration -float 0.3
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
@@ -423,9 +423,6 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
 
-# Hide Spotlight tray-icon (and subsequent helper)
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-
 # Disable signing GPG emails by default
 defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
 
@@ -449,9 +446,6 @@ for domain in ~/Library/Preferences/com.apple.systemuiserver.*; do
         "/System/Library/CoreServices/Menu Extras/Battery.menu" \
         "/System/Library/CoreServices/Menu Extras/Clock.menu"
 done
-
-# Menu bar: Insert iStat Menu Modules
-defaults write com.apple.systemuiserver menuExtras -array "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusCPU.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusMemory.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusDrives.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusNetwork.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusSensors.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusBattery.menu" "/Library/Application\ Support/iStat\ Menus\ 5/extras/iStatMenusTime.menu"
 
 # Wipe all (default) app icons from the Dock
 defaults write com.apple.dock persistent-apps -array ""
