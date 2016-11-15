@@ -2,6 +2,11 @@
 #
 # Install atom packages
 
+# Check for Atom Installation
+if test ! $(which atom)
+then brew install atom
+fi
+
 # Git
 apm install git-plus
 apm install git-time-machine
