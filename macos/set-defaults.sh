@@ -101,6 +101,12 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
+# Trackpad: enable light click threshold
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
+
+# Trackpad: max tracking speed
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
+
 # Gestures
 defaults write com.apple.dock showDesktopGestureEnabled -int 1
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 1
@@ -115,7 +121,7 @@ defaults -currentHost write -g com.apple.trackpad.rotateGesture -int 1
 defaults write -g AppleEnableSwipeNavigateWithScrolls -int 1
 defaults -currentHost write -g com.apple.trackpad.threeFingerHorizSwipeGesture -int 2
 
-# Set max trackpad scaling speed
+# Set max trackpad scaling speed (doesn't work anymore in Sierra)
 # defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
 # defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
 
@@ -401,14 +407,10 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 # Disable line marks in Terminal.app
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
-# Install the Solarized theme for Terminal
-open "${HOME}/.dotfiles/system/Solarized Dark.terminal"
-open "${HOME}/.dotfiles/system/Solarized Light.terminal"
-
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
-defaults write com.apple.terminal FocusFollowsMouse -bool true
-defaults write org.x.X11 wm_ffm -bool true
+# defaults write com.apple.terminal FocusFollowsMouse -bool true
+# defaults write org.x.X11 wm_ffm -bool true
 
 # ZSH as the Default Shell
 if [ -f /usr/local/bin/zsh ]; then
@@ -433,6 +435,8 @@ fi
 osascript <<EOD
 tell application "Terminal"
 	set themeName to "Solarized Dark"
+	do shell script "open '$HOME/.dotfiles/system/" & themeName & ".terminal'"
+	set default settings to settings set themeName
 end tell
 EOD
 
@@ -579,6 +583,6 @@ fi
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Photos" "Safari" "SystemUIServer" "Terminal"; do killall "${app}" > /dev/null 2>&1
+for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "Photos" "Safari" "SystemUIServer"; do killall "${app}" > /dev/null 2>&1
 done
 echo "Note that some of these changes require a logout/restart to take effect."
