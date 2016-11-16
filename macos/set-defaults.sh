@@ -7,6 +7,10 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -89,12 +93,13 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 ###############################################################################
 
 # Trackpad: enable tap to click for this user and for the login screen
-# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-# defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Trackpad: enable secondary click for this user
-# defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
 # Gestures
 defaults write com.apple.dock showDesktopGestureEnabled -int 1
@@ -121,7 +126,8 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Eliminate Keyboard Delay Until Repeat
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
@@ -141,9 +147,6 @@ defaults write NSGlobalDomain AppleLanguages -array "en"
 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
 defaults write NSGlobalDomain AppleMetricUnits -bool false
-
-# Set the timezone; see `systemsetup -listtimezones` for other values
-systemsetup -settimezone "America/New_York" > /dev/null
 
 # Enable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
@@ -201,11 +204,15 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Avoid creating .DS_Store files on network volumes
+# Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Enable spring loading for directories
 defaults write NSGlobalDomain com.apple.springing.enabled -bool true
@@ -264,10 +271,10 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     Privileges -bool true
 
 ###############################################################################
-# Dock, Dashboard, and hot corners                                            #
+# Dock, Dashboard, and Hot Corners                                            #
 ###############################################################################
 
-# Add a "Recent Files" Stack to the Dock
+# Add a "Recent Applications" Stack to the Dock
 # defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
 
 # Change minimize/maximize window effect
@@ -305,6 +312,10 @@ defaults write com.apple.dock autohide-delay -float 0
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
+
+# Add iOS & Watch Simulator to Launchpad
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
 
 # Hot corners
 # Possible values:
@@ -349,8 +360,8 @@ defaults write com.apple.Safari ShowFavoritesBar -bool false
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-# Set Safari’s home page to `about:blank` for faster loading
-defaults write com.apple.Safari HomePage -string "about:blank"
+# Set Safari’s home page to Techmeme
+defaults write com.apple.Safari HomePage -string "http://www.techmeme.com/"
 
 # Prevent Safari from opening ‘safe’ files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
@@ -358,35 +369,46 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 # Allow hitting the Backspace key to go to the previous page in history
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 
+# Warn about fraudulent websites
+defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
+
+# Disable plug-ins
+defaults write com.apple.Safari WebKitPluginsEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
+
+# Disable Java
+defaults write com.apple.Safari WebKitJavaEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+
+# Block pop-up windows
+defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
+
+# Update extensions automatically
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
 ###############################################################################
-# Miscellanea                                                                 #
+# Terminal                                                                    #
 ###############################################################################
-
-# Prevent Time Machine from prompting to use new hard drives as backup volume
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
-# Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
-
-# Disable Gatekeeper
-sudo spctl --master-disable
-
-# Don't play feedback when volume is changed
-defaults write -g 'com.apple.sound.beep.feedback' -bool false
-
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
-
-# Use AirDrop over every interface (Wi-Fi/PAN + Ethernet, etc.)
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4e
 
+# Enable Secure Keyboard Entry in Terminal.app
+# See: https://security.stackexchange.com/a/47786/8918
+defaults write com.apple.terminal SecureKeyboardEntry -bool true
+
+# Disable line marks in Terminal.app
+defaults write com.apple.Terminal ShowLineMarks -int 0
+
+# Install the Solarized theme for Terminal
+open "${HOME}/.dotfiles/system/Solarized Dark.terminal"
+open "${HOME}/.dotfiles/system/Solarized Light.terminal"
+
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
-#defaults write com.apple.terminal FocusFollowsMouse -bool true
-#defaults write org.x.X11 wm_ffm -bool true
+defaults write com.apple.terminal FocusFollowsMouse -bool true
+defaults write org.x.X11 wm_ffm -bool true
 
 # ZSH as the Default Shell
 if [ -f /usr/local/bin/zsh ]; then
@@ -407,18 +429,113 @@ else
    chsh -s /bin/zsh
 fi
 
-# Enable the WebKit Developer Tools in the Mac App Store
-defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+# Solarized Dark as default in Terminal.app
+osascript <<EOD
+tell application "Terminal"
+	set themeName to "Solarized Dark"
+end tell
+EOD
+
+###############################################################################
+# Time Machine                                                                #
+###############################################################################
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Disable local Time Machine backups
+hash tmutil &> /dev/null && sudo tmutil disablelocal
+
+###############################################################################
+# Photos                                                                      #
+###############################################################################
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+###############################################################################
+# Google Chrome & Google Chrome Canary                                        #
+###############################################################################
+
+# Disable the all too sensitive backswipe on trackpads
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+
+# Disable the all too sensitive backswipe on Magic Mouse
+defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+
+# Use the system-native print preview dialog
+defaults write com.google.Chrome DisablePrintPreview -bool true
+defaults write com.google.Chrome.canary DisablePrintPreview -bool true
+
+# Expand the print dialog by default
+defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
+defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
+
+###############################################################################
+# Activity Monitor                                                            #
+###############################################################################
+
+# Show the main window when launching Activity Monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Visualize CPU usage in the Activity Monitor Dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+###############################################################################
+# Mac App Store                                                               #
+###############################################################################
+
+# Enable the WebKit Developer Tools in the Mac App Store
+defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
 
-# Disable signing GPG emails by default
-defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
+# Enable the automatic update check
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Download newly available updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+# Install System data files & security updates
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+
+# Automatically download apps purchased on other Macs
+defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+
+# Turn on app auto-update
+defaults write com.apple.commerce AutoUpdate -bool true
+
+# Allow the App Store to reboot machine on macOS updates
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
+
+###############################################################################
+# Miscellanea                                                                 #
+###############################################################################
+
+# Disable Gatekeeper
+sudo spctl --master-disable
+
+# Don't play feedback when volume is changed
+defaults write -g 'com.apple.sound.beep.feedback' -bool false
+
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
+# Use AirDrop over every interface (Wi-Fi/PAN + Ethernet, etc.)
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
 ###############################################################################
 # First System Boot: WARNING -- THESE SETTINGS ARE SPECIFIC FOR JOSHUABERK    #
@@ -462,6 +579,6 @@ fi
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "Safari" "SystemUIServer" ; do killall "${app}" > /dev/null 2>&1
+for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Photos" "Safari" "SystemUIServer" "Terminal"; do killall "${app}" > /dev/null 2>&1
 done
 echo "Note that some of these changes require a logout/restart to take effect."
