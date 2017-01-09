@@ -458,16 +458,14 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
-# Google Chrome & Google Chrome Canary                                        #
+# Google Chrome                                                               #
 ###############################################################################
 
 # Disable the all too sensitive backswipe on trackpads
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Disable the all too sensitive backswipe on Magic Mouse
 defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
 ###############################################################################
 # Activity Monitor                                                            #
@@ -559,7 +557,7 @@ defaults write com.apple.dock persistent-apps -array ""
 
 # Add custom icons into the Dock
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Safari.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome Canary.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Sketch.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/App Store.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Utilities/Terminal.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
@@ -567,7 +565,7 @@ defaults write com.apple.dock 'persistent-apps' -array-add '<dict><key>tile-data
 
 # Start Applications at login
 osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Drive.app", hidden:true }' > /dev/null 2>&1
-osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome Canary.app", hidden:true }' > /dev/null 2>&1
+osascript -e 'tell application "System Events" to make new login item at end of login items with properties { path: "/Applications/Google Chrome.app", hidden:true }' > /dev/null 2>&1
 
 fi
 
