@@ -18,6 +18,7 @@ brew cask install atom 2> /dev/null
 brew cask install duet 2> /dev/null
 brew cask install appzapper 2> /dev/null
 brew cask install 1password 2> /dev/null
+brew cask install gpgtools 2> /dev/null
 brew cask install sonos 2> /dev/eull
 brew cask install adobe-creative-cloud 2> /dev/null
 
