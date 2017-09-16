@@ -22,6 +22,7 @@ brew cask install gpgtools 2> /dev/null
 brew cask install sonos 2> /dev/null
 brew cask install adobe-creative-cloud 2> /dev/null
 brew cask install arq 2> /dev/null
+brew cask install toggl 2> /dev/null 
 
 # Fonts
 brew cask install font-inconsolata 2> /dev/null
